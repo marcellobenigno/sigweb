@@ -8,8 +8,15 @@ O **GeoServer** possui uma excelente documentação, dividida em duas seções: 
 * Documentação do usuário: https://docs.geoserver.org/stable/en/user/
 * Documentação do desenvolvedor: https://docs.geoserver.org/stable/en/developer/
 
+<div align="center">
 
-## Instalação do GeoServer no Windows:
+[![Instalação](http://img.youtube.com/vi/0qoWrPOyerE/0.jpg)](https://www.youtube.com/watch?v=0qoWrPOyerE)
+
+WebGIS: Conheça o GeoServer | VasGeo
+
+</div>
+
+### Instalação do GeoServer no Windows:
 
 <div align="center">
 
@@ -20,7 +27,7 @@ Como instalar o GeoServer | Geocursos
 </div>
 
 
-## Interface Administrativa
+### Interface Administrativa
 
 Uma vez instalado o GeoServer, é possível logar no mesmo através do link: http://localhost:8080/geoserver, com as seguintes credenciais:
 
@@ -104,6 +111,15 @@ O Store realiza a conexão a uma fonte de dados vetorial ou raster. Cada Store �
 
 O Style define a apresentação visual (simbologia) da camada através da linguagem *Styled Layer Descriptor (SLD)*.
 
+A sintaxe de um arquivo SLD pode ser gerada através de softwares de SIG, tais como: QGIS, uDig, OpenJump, entre outros.
+
+Mais informações sobre a linguagem SLD podem ser obtidas através dos links abaixo:
+
+* Pontos: https://docs.geoserver.org/stable/en/user/styling/sld/cookbook/points.html
+* Linhas: https://docs.geoserver.org/stable/en/user/styling/sld/cookbook/lines.html
+* Polígonos: https://docs.geoserver.org/stable/en/user/styling/sld/cookbook/polygons.html
+
+
 ### Layers
 
 ![Layers](../img/ui_layers.png)
@@ -112,16 +128,6 @@ Este termo no GeoServer, refere-se a dados vetoriais ou matriciais publicados no
 *Feature Types* e para os dados matriciais estas camadas são denominadas de *coverages*.
 
 
-## Fluxo Geral de Publicação de uma Camada
+## Fluxo Geral de Publicação de uma Camada no GeoServer
 
 ![Fluxo de Publicação](../img/fluxo_geoserver.png)
-
-<hr/>
-
-<div align="center">
-
-[![Instalação](http://img.youtube.com/vi/0qoWrPOyerE/0.jpg)](https://www.youtube.com/watch?v=0qoWrPOyerE "Como instalar PostgreSQL com PostGIS no Windows")
-
-WebGIS: Conheça o GeoServer | VasGeo
-
-</div>
