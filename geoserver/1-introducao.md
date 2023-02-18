@@ -69,7 +69,7 @@ No GeoServer, a maneira mais prática de visualizar uma camada é através da op
 
 O **Workspace** serve para organizar os itens no GeoServer de forma semelhante a uma pasta em um sistema operacional.
 
-O GeoServer armazena as camadas em um Workspace utilizando uma hieraquia de pastas, semelhante ao do exemplo abaixo:
+O GeoServer armazena as camadas em um Workspace utilizando uma hieraquia de pastas, como mostra o exemplo abaixo:
 
 ```
 workspace_pb
