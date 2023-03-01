@@ -97,7 +97,6 @@ workspace_pb
 
 ```
 
-
 ### Stores
 
 ![Store](../img/ui_datastores.png)
@@ -127,7 +126,46 @@ Mais informações sobre a linguagem SLD podem ser obtidas através dos links ab
 Este termo no GeoServer, refere-se a dados vetoriais ou matriciais publicados no servidor. Caso o dado seja vetorial, os layers são denominados de
 *Feature Types* e para os dados matriciais estas camadas são denominadas de *coverages*.
 
-
-## Fluxo Geral de Publicação de uma Camada no GeoServer
+<hr>
 
 ![Fluxo de Publicação](../img/fluxo_geoserver.png)
+
+<hr>
+
+### Publicando Dados Vetoriais (Shapefile)
+
+1. Crie um `Workspace`: na interface web do Geoserver, clique na guia `Workspaces` e depois no botão `New Workspace`. Insira um nome para o seu espaço de trabalho e clique em `Save`.
+
+![publicando dados vetoriais - 1](../img/vect1.jpg)
+
+
+2. Crie um `Store`: clique na guia `Stores` e depois no botão `Add new Store`, em seguida clique na opção `Shapefile`. Escolha o shapefile que deseja publicar.
+
+
+![publicando dados vetoriais - 2](../img/vect2.jpg)
+
+
+3. Após preencher a tela anterior, clique em `Save` e passe para a próxima tela `Layer` -> `New layer`, clique em `publish`.
+
+![publicando dados vetoriais - 3](../img/vect3.jpg)
+
+4. Na tela `Edit Layer` preencha os metadados da camada.
+
+![publicando dados vetoriais - 4](../img/vect4.jpg)
+
+5. Role esta tela para baixo, até a opção `Bounding Boxes`, clique nos botões `Compute from data` e `Compute from native bounds`. Depois clique em `Save`.
+
+![publicando dados vetoriais - 5](../img/vect5.jpg)
+
+6. Crie um novo `Style`: no QGIS, defina a simbologia da sua camada e a salve como **SLD**. Abra a aba `Style` do GeoServer e faça o upload do arquivo SLD gerado, em seguida clique em `Apply`.
+
+
+![publicando dados vetoriais - 6](../img/vect6.jpg)
+
+7. Na aba `Publishing` associe o estilo criado a sua camada. Clique em `Save`.
+
+![publicando dados vetoriais - 7](../img/vect7.jpg)
+
+8. Clique na guia `Layer Preview`, escolha a camada publicada anteriormente e em seguida, clique na opção `OpenLayers` para visualizar a camada.
+
+![publicando dados vetoriais - 8](../img/vect8.jpg)

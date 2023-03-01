@@ -4,7 +4,10 @@
 
 ## ÍNDICE
 
-#### [1. GeoServer][1]
+#### [1. SIG-Web: uma Abordagem Geral][1]
 
-[1]:geoserver/1-introducao.md
+#### [2. GeoServer][2]
 
+[1]:intro/1-introducao.md
+
+[2]:geoserver/1-introducao.md
