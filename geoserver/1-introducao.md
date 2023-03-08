@@ -159,7 +159,6 @@ Este termo no GeoServer, refere-se a dados vetoriais ou matriciais publicados no
 
 6. Crie um novo `Style`: no QGIS, defina a simbologia da sua camada e a salve como **SLD**. Abra a aba `Style` do GeoServer e faça o upload do arquivo SLD gerado, em seguida clique em `Apply`.
 
-
 ![publicando dados vetoriais - 6](../img/vect6.jpg)
 
 7. Na aba `Publishing` associe o estilo criado a sua camada. Clique em `Save`.
@@ -169,3 +168,38 @@ Este termo no GeoServer, refere-se a dados vetoriais ou matriciais publicados no
 8. Clique na guia `Layer Preview`, escolha a camada publicada anteriormente e em seguida, clique na opção `OpenLayers` para visualizar a camada.
 
 ![publicando dados vetoriais - 8](../img/vect8.jpg)
+
+
+<hr/>
+
+### Publicando Dados Matriciais (GeoTiff)
+
+OBS. Neste exemplo vamos utilizar o mesmo `Workspace` anterior, então não será necessário criá-lo.
+
+1. Crie um `Store`: clique na guia `Stores` e depois no botão `Add new Store`, em seguida clique na opção `GeoTIFF`. Escolha a imagem que deseja publicar.
+
+![publicando dados matriciais - 1](../img/rast1.jpg)
+
+2. Após preencher a tela anterior, clique em `Save` e passe para a próxima tela `Layer` -> `New layer`, clique em `publish`.
+
+![publicando dados matriciais - 2](../img/rast2.jpg)
+
+3. Na tela `Edit Layer` preencha os metadados da camada (opcional) em seguida, role a página para baixo e clique em `Save`.
+
+![publicando dados matriciais - 3](../img/rast3.jpg)
+
+4. Crie um novo `Style`: no QGIS, instale o plugin **SLD4raster**. Em seguida, defina a simbologia da sua camada. Clique no botão do plugin e depois clique em `Generate SLD`.
+
+![publicando dados matriciais - 4](../img/rast4.jpg)
+
+5. Abra a aba `Style` do GeoServer e faça o upload do arquivo SLD gerado, em seguida clique em `Apply`.
+
+![publicando dados matriciais - 5](../img/rast5.jpg)
+
+6. Na aba `Publishing` associe o estilo criado a sua camada. Clique em `Save`.
+
+![publicando dados matriciais - 6](../img/rast6.jpg)
+
+7. Clique na guia `Layer Preview`, escolha a camada publicada anteriormente e em seguida, clique na opção `OpenLayers` para visualizar a camada.
+
+![publicando dados matriciais - 7](../img/rast7.jpg)
