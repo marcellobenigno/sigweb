@@ -4,7 +4,7 @@
 
 ## ÍNDICE
 
-#### [1. SIG-Web: uma Abordagem Geral][1]
+#### [1. Introdução a Linguagem HTML][1]
 
 #### [2. SIG-Web: uma Abordagem Geral][2]
 
