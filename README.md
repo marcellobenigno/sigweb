@@ -10,7 +10,7 @@
 
 #### [3. GeoServer][3]
 
-[1]:intro/1-intro-html.md
+[1]:html/1-intro-html.md
 
 [2]:sigweb/1-introducao_sigweb.md
 
