@@ -6,8 +6,12 @@
 
 #### [1. SIG-Web: uma Abordagem Geral][1]
 
-#### [2. GeoServer][2]
+#### [2. SIG-Web: uma Abordagem Geral][2]
 
-[1]:intro/1-introducao.md
+#### [3. GeoServer][3]
 
-[2]:geoserver/1-introducao.md
+[1]:intro/1-intro-html.md
+
+[2]:sigweb/1-introducao_sigweb.md
+
+[3]:geoserver/1-introducao.md
