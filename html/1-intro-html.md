@@ -7,7 +7,7 @@ Este curso foi elaborado para fornecer uma introdução completa e acessível à
 
 ## Ementa do Curso
 
-### Módulo 1: Introdução ao HTML e à Web
+### Módulo 1: Introdução ao HTML e a Web
 
 * Tópico 1: O que é HTML?
 	* Definição de HTML (HyperText Markup Language).
