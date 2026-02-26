@@ -39,8 +39,7 @@ O navegador lê esse texto marcado e constrói uma árvore de objetos chamada **
 - Plugin recomendado: **HTML-CSS-JS Prettify** (formatação automática via `Ctrl+Shift+H`)
 - Plugin recomendado: **LiveReload** (recarrega o navegador automaticamente ao salvar)
 - Plugin recomendado: **SublimeLinter + SublimeLinter-html-tidy** (valida o HTML em tempo real, sublinhando erros)
-- Plugin recomendado: **Emmet** (já incluso — gera estrutura HTML com atalhos, ex: `html:5` + `Tab`)
-- Plugin recomendado: **BracketHighlighter** (destaca pares de tags abertura/fechamento)
+- Plugin recomendado: **A File Icon** (deixa os ícones mais amigáveis)
 
 > **Como instalar plugins:** Acesse o **Package Control** com `Ctrl+Shift+P` → digite `Install Package` → pesquise o nome do plugin.
 
