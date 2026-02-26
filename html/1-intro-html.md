@@ -1,6 +1,6 @@
 # HTML5 & CSS3 para WebGIS: Do Zero ao Visualizador de Mapas
 
-> **Público-alvo:** Tecnologia em Geoprocessamento — Iniciantes em WebGIS
+> **Público-alvo:** Alunos do Curso Superior de Tecnologia em Geoprocessamento (IFPB) || Iniciantes em WebGIS
 > **Pré-requisito:** Nenhum. Apenas familiaridade com computador e navegador.
 > **Projeto Fio-Condutor:** Ao longo do curso, você construirá um **Visualizador de Mapas Estático** — uma página web completa com mapa, legenda, tabela de atributos e formulário de consulta.
 
