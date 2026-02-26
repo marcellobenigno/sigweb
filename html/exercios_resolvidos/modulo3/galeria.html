@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Galeria de Mapas — Recursos Hídricos do Nordeste</title>
+</head>
+<body>
+
+  <h1>Galeria de Mapas — Recursos Hídricos do Nordeste</h1>
+
+  <!-- Figura 1: Mapa temático de bacias hidrográficas -->
+  <figure>
+    <img
+      src="https://placehold.co/800x600/1565c0/ffffff?text=Bacias+Hidrograficas+NE"
+      alt="Mapa temático das bacias hidrográficas do Nordeste brasileiro. Cada bacia é
+           delimitada por uma cor distinta: azul escuro para a bacia do São Francisco,
+           azul médio para a bacia do Parnaíba e azul claro para as bacias atlânticas
+           do Nordeste. Rios principais estão representados em linhas mais espessas."
+      width="800"
+      height="600"
+      loading="lazy"
+      title="Bacias Hidrográficas do Nordeste — Fonte: ANA, 2022 — EPSG:4674"
+    >
+    <figcaption>
+      Figura 1 — Bacias Hidrográficas do Nordeste Brasileiro.
+      Fonte: <strong><abbr title="Agência Nacional de Águas e Saneamento Básico">ANA</abbr></strong>, 2022.
+      Projeção: <abbr title="Sistema de Referência Geocêntrico para as Américas">SIRGAS</abbr>
+      2000 — <code>EPSG:4674</code>.
+    </figcaption>
+    <p>
+      <a href="dados/bacias_nordeste.zip" download="bacias_nordeste.zip">
+        Download: Bacias Hidrográficas do Nordeste (Shapefile ZIP, ~4,2 MB)
+      </a>
+    </p>
+  </figure>
+
+  <hr>
+
+  <!-- Figura 2: Mapa NDVI -->
+  <figure>
+    <img
+      src="https://placehold.co/800x600/2e7d32/ffffff?text=NDVI+Semiarido+2023"
+      alt="Mapa NDVI do Semiárido nordestino referente a agosto de 2023. Tons de verde
+           escuro concentrados na Serra da Borborema e Chapada Diamantina indicam vegetação
+           preservada com NDVI acima de 0,6. Tons amarelos e marrons no Sertão indicam
+           Caatinga em período de seca sazonal, com NDVI entre 0,1 e 0,3. Manchas em
+           azul correspondem a corpos d'água com NDVI negativo."
+      width="800"
+      height="600"
+      loading="lazy"
+      title="NDVI — Sentinel-2, Bandas B8 e B4, agosto/2023 — Resolução 10m"
+    >
+    <figcaption>
+      Figura 2 — Índice <abbr title="Normalized Difference Vegetation Index">NDVI</abbr>
+      do Semiárido Nordestino, agosto de 2023.
+      Fonte: <strong>Sentinel-2 / <abbr title="European Space Agency">ESA</abbr></strong>.
+      Processamento: QGIS 3.36 com plugin <em>Semi-Automatic Classification Plugin (SCP)</em>.
+      Resolução espacial: <strong>10 metros</strong>.
+    </figcaption>
+    <p>
+      <a href="dados/ndvi_semiarido_ago2023.tif" download="ndvi_semiarido_ago2023.tif">
+        Download: Raster NDVI (GeoTIFF, ~28 MB)
+      </a>
+    </p>
+  </figure>
+
+  <hr>
+
+  <!-- Figura 3: Mapa de uso e cobertura do solo -->
+  <figure>
+    <img
+      src="https://placehold.co/800x600/795548/ffffff?text=Uso+do+Solo+PB+2023"
+      alt="Mapa de uso e cobertura do solo da Paraíba referente a 2023. Predominância de
+           áreas de pastagem e agropecuária no Sertão em tons ocre. Manchas urbanas em
+           cinza escuro destacam João Pessoa, Campina Grande e Patos. Remanescentes de
+           Mata Atlântica aparecem em verde escuro na faixa costeira oriental."
+      width="800"
+      height="600"
+      loading="lazy"
+      title="Uso e Cobertura do Solo — MapBiomas Coleção 8, Paraíba 2023"
+    >
+    <figcaption>
+      Figura 3 — Uso e Cobertura do Solo, Paraíba, 2023.
+      Fonte: <strong>MapBiomas</strong> (Coleção 8).
+      Escala de referência: <strong>1:250.000</strong>.
+      Licença:
+      <a href="https://creativecommons.org/licenses/by/4.0/"
+         target="_blank"
+         rel="noopener noreferrer">CC BY 4.0</a>.
+    </figcaption>
+    <p>
+      <a href="dados/uso_solo_pb_2023.gpkg" download="uso_solo_pb_2023.gpkg">
+        Download: Uso do Solo PB 2023 (GeoPackage, ~12 MB)
+      </a>
+    </p>
+  </figure>
+
+</body>
+</html>

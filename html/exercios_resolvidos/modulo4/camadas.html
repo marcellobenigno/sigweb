@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Painel de Camadas — Projeto Hidrografia PB</title>
+</head>
+<body>
+
+  <h1>Projeto: Mapeamento de Recursos Hídricos da Paraíba</h1>
+
+  <!-- Exercício 4.B — Parte 1: ol com fluxo de trabalho -->
+  <h2>Fluxo de Trabalho</h2>
+  <ol>
+    <li>Definição da área de interesse e da escala de análise</li>
+    <li>
+      Download de dados hidrográficos na
+      <abbr title="Agência Nacional de Águas e Saneamento Básico">ANA</abbr> e no
+      <abbr title="Instituto Brasileiro de Geografia e Estatística">IBGE</abbr>
+    </li>
+    <li>Importação e conferência dos dados no QGIS 3.36</li>
+    <li>
+      Reprojeção para SIRGAS 2000 / UTM Zone 25S
+      (<code>EPSG:31985</code>)
+    </li>
+    <li>Classificação e simbologia temática das camadas</li>
+    <li>Geração do layout e exportação do mapa em PNG e PDF</li>
+    <li>Publicação via página HTML com visualizador estático</li>
+  </ol>
+
+  <!-- Exercício 4.B — Parte 2: ul aninhada por categoria -->
+  <h2>Camadas de Dados</h2>
+  <ul>
+    <li>Camadas de Base
+      <ul>
+        <li>OpenStreetMap (tile XYZ)</li>
+        <li>Imagem Sentinel-2 — composição RGB (B4, B3, B2)</li>
+        <li>Modelo Digital de Elevação SRTM — resolução 30 m</li>
+      </ul>
+    </li>
+    <li>Camadas Temáticas
+      <ul>
+        <li>Rede hidrográfica — rios perenes e intermitentes</li>
+        <li>Açudes e reservatórios — polígonos de espelho d'água</li>
+        <li>Bacias e sub-bacias hidrográficas (delimitação)</li>
+        <li>Pontos de monitoramento pluviométrico da ANA</li>
+      </ul>
+    </li>
+    <li>Camadas Auxiliares
+      <ul>
+        <li>Limites municipais — Paraíba (IBGE 2022)</li>
+        <li>Rodovias federais e estaduais (DNIT)</li>
+        <li>Sedes municipais (pontos de referência)</li>
+      </ul>
+    </li>
+  </ul>
+
+  <!-- Exercício 4.B — Parte 3: dl com metadados (mínimo 6 pares) -->
+  <h2>Metadados da Camada Principal — Rede Hidrográfica</h2>
+  <dl>
+    <dt>Título</dt>
+    <dd>Rede Hidrográfica da Paraíba — 2022</dd>
+
+    <dt>Resumo</dt>
+    <dd>
+      Camada vetorial da rede hídrica estadual incluindo rios perenes, intermitentes e
+      corpos d'água. Produzida pela ANA e IBGE em escala 1:250.000.
+    </dd>
+
+    <dt>Formato</dt>
+    <dd>Shapefile (.shp) e GeoPackage (.gpkg)</dd>
+
+    <dt>Sistema de Referência</dt>
+    <dd>SIRGAS 2000 — <code>EPSG:4674</code></dd>
+
+    <dt>Escala de Captura</dt>
+    <dd>1:250.000</dd>
+
+    <dt>Data de Referência</dt>
+    <dd><time datetime="2022-12-31">31 de dezembro de 2022</time></dd>
+
+    <dt>Instituição Responsável</dt>
+    <dd>
+      <abbr title="Agência Nacional de Águas e Saneamento Básico">ANA</abbr> em parceria com
+      <abbr title="Instituto Brasileiro de Geografia e Estatística">IBGE</abbr>
+    </dd>
+
+    <dt>Licença</dt>
+    <dd>Creative Commons CC BY 4.0 — uso livre com atribuição</dd>
+
+    <dt>Contato</dt>
+    <dd>geoportal@ana.gov.br</dd>
+  </dl>
+
+</body>
+</html>

@@ -1,0 +1,419 @@
+/* ============================================================
+   VISUALIZADOR WEBGIS — Folha de Estilos Principal
+   Módulo 7: Introdução ao CSS3
+   Exercício 7.A: Legenda | Exercício 7.B: Layout CSS Grid
+   ============================================================ */
+
+
+/* ─── VARIÁVEIS CSS (:root) ─── */
+:root {
+  /* Paleta temática — Hidrografia da Paraíba */
+  --cor-rio-perene:       #1565c0;
+  --cor-rio-intermitente: #90caf9;
+  --cor-reservatorio:     #0288d1;
+  --cor-bacia:            #bbdefb;
+  --cor-area-urbana:      #424242;
+
+  /* Cores de interface */
+  --cor-primaria:   #1a237e;
+  --cor-secundaria: #546e7a;
+  --cor-fundo:      #f5f5f5;
+  --cor-borda:      #e0e0e0;
+  --cor-hover:      #e3f2fd;
+
+  /* Tipografia */
+  --fonte-principal: 'Segoe UI', system-ui, Arial, sans-serif;
+  --tamanho-base:    16px;
+
+  /* Espaçamentos */
+  --espaco-sm: 8px;
+  --espaco-md: 16px;
+  --espaco-lg: 32px;
+}
+
+
+/* ─── RESET BÁSICO ─── */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+
+/* ─── BODY — Layout CSS Grid (Exercício 7.B) ─── */
+body {
+  font-family: var(--fonte-principal);
+  font-size: var(--tamanho-base);
+  background-color: var(--cor-fundo);
+  color: #212121;
+  line-height: 1.6;
+
+  /* Grid macro da página */
+  display: grid;
+  grid-template-areas:
+    "header  header"
+    "nav     nav"
+    "map     aside"
+    "footer  footer";
+  grid-template-columns: 1fr 300px;
+  grid-template-rows: auto auto 1fr auto;
+  min-height: 100vh;
+}
+
+/* Atribuição dos elementos às áreas nomeadas do grid */
+body > header { grid-area: header; }
+body > nav    { grid-area: nav;    }
+body > main   { grid-area: map;    }
+body > aside  { grid-area: aside;  }
+body > footer { grid-area: footer; }
+
+
+/* ─── CABEÇALHO ─── */
+header {
+  background-color: var(--cor-primaria);
+  color: white;
+  padding: var(--espaco-md) var(--espaco-lg);
+}
+
+header h1 {
+  font-size: 1.6rem;
+  font-weight: 700;
+}
+
+header .subtitulo {
+  font-size: 0.9rem;
+  opacity: 0.85;
+  margin-top: 4px;
+}
+
+
+/* ─── NAVEGAÇÃO ─── */
+nav {
+  background-color: var(--cor-secundaria);
+  padding: var(--espaco-sm) var(--espaco-lg);
+}
+
+nav ul {
+  list-style: none;
+  display: flex;
+  gap: var(--espaco-md);
+  flex-wrap: wrap;
+}
+
+nav a {
+  color: white;
+  text-decoration: none;
+  font-size: 0.9rem;
+  padding: 4px 8px;
+  border-radius: 4px;
+  transition: background-color 0.2s;
+}
+
+nav a:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+
+/* ─── CONTEÚDO PRINCIPAL ─── */
+main {
+  padding: var(--espaco-md);
+  overflow-y: auto;
+}
+
+main h2 {
+  color: var(--cor-primaria);
+  font-size: 1.1rem;
+  margin-bottom: var(--espaco-sm);
+  border-bottom: 2px solid var(--cor-borda);
+  padding-bottom: 4px;
+}
+
+/* Figura do mapa */
+figure {
+  margin-bottom: var(--espaco-md);
+}
+
+figure img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border: 2px solid var(--cor-borda);
+  border-radius: 4px;
+}
+
+figcaption {
+  font-size: 0.8rem;
+  color: #555;
+  margin-top: var(--espaco-sm);
+  padding: var(--espaco-sm);
+  background-color: white;
+  border: 1px solid var(--cor-borda);
+  border-top: none;
+  border-radius: 0 0 4px 4px;
+}
+
+
+/* ─── SEÇÃO DE CONSULTA / FORMULÁRIO ─── */
+#consulta {
+  background-color: white;
+  padding: var(--espaco-md);
+  border: 1px solid var(--cor-borda);
+  border-radius: 4px;
+  margin-top: var(--espaco-md);
+}
+
+fieldset {
+  border: 1px solid var(--cor-borda);
+  border-radius: 4px;
+  padding: var(--espaco-md);
+  margin-bottom: var(--espaco-sm);
+}
+
+legend {
+  font-weight: bold;
+  color: var(--cor-secundaria);
+  padding: 0 var(--espaco-sm);
+}
+
+/* Campos de formulário com Flexbox interno */
+label {
+  display: block;
+  margin-top: var(--espaco-sm);
+  font-size: 0.9rem;
+  color: #333;
+}
+
+input[type="text"],
+input[type="number"],
+input[type="date"],
+input[type="email"],
+input[type="url"],
+select,
+textarea {
+  display: block;
+  width: 100%;
+  padding: 6px var(--espaco-sm);
+  margin-top: 4px;
+  border: 1px solid var(--cor-borda);
+  border-radius: 4px;
+  font-family: var(--fonte-principal);
+  font-size: 0.9rem;
+  background-color: #fafafa;
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus,
+select:focus,
+textarea:focus {
+  outline: 2px solid var(--cor-primaria);
+  border-color: var(--cor-primaria);
+}
+
+input[type="range"] {
+  display: block;
+  width: 100%;
+  margin-top: 4px;
+}
+
+button {
+  margin-top: var(--espaco-sm);
+  margin-right: var(--espaco-sm);
+  padding: 8px var(--espaco-md);
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-family: var(--fonte-principal);
+  font-size: 0.9rem;
+}
+
+button[type="submit"] {
+  background-color: var(--cor-primaria);
+  color: white;
+}
+
+button[type="submit"]:hover {
+  background-color: #283593;
+}
+
+button[type="reset"] {
+  background-color: var(--cor-borda);
+  color: #333;
+}
+
+button[type="reset"]:hover {
+  background-color: #bdbdbd;
+}
+
+
+/* ─── PAINEL LATERAL ─── */
+aside {
+  background-color: white;
+  border-left: 1px solid var(--cor-borda);
+  padding: var(--espaco-md);
+  overflow-y: auto;
+}
+
+aside h2 {
+  color: var(--cor-primaria);
+  font-size: 1rem;
+  margin-bottom: var(--espaco-sm);
+  border-bottom: 2px solid var(--cor-borda);
+  padding-bottom: 4px;
+}
+
+aside section {
+  margin-bottom: var(--espaco-lg);
+}
+
+
+/* ─── LEGENDA (Exercício 7.A) ─── */
+
+/* Container da legenda com borda arredondada */
+#legenda {
+  border: 1px solid var(--cor-borda);
+  border-radius: 8px;
+  padding: var(--espaco-md);
+  background-color: #fafafa;
+}
+
+/* Lista sem marcadores padrão */
+.lista-legenda {
+  list-style: none;
+}
+
+/* Flexbox: quadrado colorido + rótulo alinhados na mesma linha */
+.lista-legenda li {
+  display: flex;
+  align-items: center;
+  gap: var(--espaco-sm);
+  padding: 4px 0;
+  font-size: 0.875rem;
+}
+
+/* Quadrado de cor 16x16px com bordas arredondadas */
+.cor-legenda {
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  border-radius: 3px;
+  flex-shrink: 0;
+  border: 1px solid rgba(0, 0, 0, 0.15);
+}
+
+/* Cores individuais usando variáveis CSS */
+.legenda-rio-perene       { background-color: var(--cor-rio-perene); }
+.legenda-rio-intermitente { background-color: var(--cor-rio-intermitente); }
+.legenda-reservatorio     { background-color: var(--cor-reservatorio); }
+.legenda-bacia            { background-color: var(--cor-bacia); }
+.legenda-urbana           { background-color: var(--cor-area-urbana); }
+
+
+/* ─── TABELA DE ATRIBUTOS ─── */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.8rem;
+  margin-top: var(--espaco-sm);
+}
+
+caption {
+  font-weight: bold;
+  font-size: 0.75rem;
+  text-align: left;
+  padding: var(--espaco-sm);
+  background-color: var(--cor-primaria);
+  color: white;
+  border-radius: 4px 4px 0 0;
+}
+
+th {
+  background-color: var(--cor-secundaria);
+  color: white;
+  padding: 6px 10px;
+  text-align: left;
+  position: sticky; /* cabeçalho fixo ao rolar */
+  top: 0;
+  font-size: 0.75rem;
+}
+
+td {
+  padding: 5px 10px;
+  border-bottom: 1px solid var(--cor-borda);
+}
+
+/* Linhas alternadas — efeito zebra */
+tbody tr:nth-child(even) {
+  background-color: #f1f8ff;
+}
+
+/* Destaque ao passar o mouse */
+tbody tr:hover {
+  background-color: var(--cor-hover);
+  cursor: pointer;
+}
+
+tfoot td {
+  font-weight: bold;
+  background-color: #eeeeee;
+  border-top: 2px solid var(--cor-secundaria);
+}
+
+
+/* ─── RODAPÉ ─── */
+footer {
+  background-color: var(--cor-primaria);
+  color: rgba(255, 255, 255, 0.85);
+  padding: var(--espaco-md) var(--espaco-lg);
+  font-size: 0.8rem;
+}
+
+footer p {
+  margin-bottom: 4px;
+}
+
+footer a {
+  color: rgba(255, 255, 255, 0.9);
+}
+
+footer a:hover {
+  color: white;
+  text-decoration: underline;
+}
+
+
+/* ─── RESPONSIVIDADE — Mobile (Exercício 7.B) ─── */
+/* max-width: 768px — empilha mapa e legenda verticalmente */
+@media (max-width: 768px) {
+  body {
+    grid-template-areas:
+      "header"
+      "nav"
+      "map"
+      "aside"
+      "footer";
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto 1fr auto auto;
+  }
+
+  header h1 {
+    font-size: 1.3rem;
+  }
+
+  nav ul {
+    gap: var(--espaco-sm);
+    font-size: 0.8rem;
+  }
+
+  aside {
+    border-left: none;
+    border-top: 2px solid var(--cor-borda);
+  }
+}
+
+
+/* ─── RESPONSIVIDADE — Desktop amplo ─── */
+@media (min-width: 1200px) {
+  body {
+    grid-template-columns: 1fr 360px;
+  }
+}

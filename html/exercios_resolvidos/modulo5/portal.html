@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Portal de Mapas — Recursos Hídricos do Nordeste</title>
+</head>
+<body>
+
+  <!-- ─── CABEÇALHO ─── -->
+  <header>
+    <h1>Portal de Mapas — Recursos Hídricos do Nordeste</h1>
+    <p>Visualizador estático de dados hidrográficos da região semiárida brasileira</p>
+  </header>
+
+  <!-- ─── NAVEGAÇÃO PRINCIPAL ─── -->
+  <!-- aria-label diferencia este <nav> de outros possíveis na página -->
+  <nav aria-label="Categorias de mapas disponíveis">
+    <ul>
+      <li><a href="#hidrografia">Hidrografia</a></li>
+      <li><a href="#vegetacao">Vegetação</a></li>
+      <li><a href="#infraestrutura">Infraestrutura</a></li>
+      <li><a href="#sobre">Sobre o Portal</a></li>
+    </ul>
+  </nav>
+
+  <!-- ─── CONTEÚDO PRINCIPAL ─── -->
+  <!-- <main> deve ocorrer apenas uma vez por página -->
+  <main>
+
+    <!-- <article>: conteúdo auto-contido — o mapa faz sentido publicado isoladamente -->
+    <article id="hidrografia">
+      <h2>Mapa: Bacias Hidrográficas da Paraíba</h2>
+      <figure>
+        <img
+          src="https://placehold.co/900x600/1565c0/ffffff?text=Bacias+Hidrograficas+PB"
+          alt="Mapa das bacias hidrográficas da Paraíba com cada bacia delimitada por cor
+               distinta: azul escuro para Piancó-Piranhas-Açu ao norte, azul médio para
+               a bacia do Rio Paraíba ao centro-sul e azul claro para as bacias costeiras."
+          width="900"
+          height="600"
+          loading="lazy"
+        >
+        <figcaption>
+          Bacias Hidrográficas da Paraíba — Fonte: <strong>ANA</strong>, 2022.
+          Projeção: <code>EPSG:4674</code> (SIRGAS 2000).
+        </figcaption>
+      </figure>
+    </article>
+
+    <!-- <section>: grupo temático que precisa de título — filtros são subtópico do main -->
+    <section id="filtros">
+      <h2>Filtros de Visualização</h2>
+      <p>
+        Selecione os parâmetros abaixo para filtrar os dados exibidos no mapa.
+        O formulário interativo será implementado no Módulo 6.
+      </p>
+    </section>
+
+  </main>
+
+  <!-- ─── CONTEÚDO LATERAL ─── -->
+  <!-- <aside>: conteúdo relacionado ao main, mas que não faz parte do fluxo principal -->
+  <aside aria-label="Legenda, tabela de atributos e informações sobre o portal">
+
+    <!-- <section>: subseção da aside com título próprio -->
+    <section id="legenda">
+      <h2>Legenda</h2>
+      <ul>
+        <li>🔵 Rios Perenes</li>
+        <li>🟡 Rios Intermitentes</li>
+        <li>💧 Açudes e Reservatórios</li>
+        <li>🟩 Área de Preservação Permanente</li>
+        <li>⬛ Limite de Bacia Hidrográfica</li>
+      </ul>
+    </section>
+
+    <!-- Tabela de atributos resumida — conteúdo relacionado ao mapa -->
+    <section id="atributos">
+      <h2>Tabela de Atributos</h2>
+      <table>
+        <caption>Principais reservatórios — resumo (ANA/AESA, 2023)</caption>
+        <thead>
+          <tr>
+            <th scope="col">Reservatório</th>
+            <th scope="col">Cap. (hm³)</th>
+            <th scope="col">Vol. (%)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Coremas</td>
+            <td>1.358,4</td>
+            <td>61,8</td>
+          </tr>
+          <tr>
+            <td>Boqueirão</td>
+            <td>411,7</td>
+            <td>42,5</td>
+          </tr>
+          <tr>
+            <td>Eng. Ávidos</td>
+            <td>255,0</td>
+            <td>38,2</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section id="sobre">
+      <h2>Sobre o Portal</h2>
+      <p>
+        Portal desenvolvido como projeto da disciplina de
+        <strong>WebGIS</strong> no curso de
+        <abbr title="Tecnologia em Geoprocessamento">TG</abbr> —
+        <abbr title="Instituto Federal da Paraíba">IFPB</abbr>.
+        Dados: <abbr title="Agência Nacional de Águas e Saneamento Básico">ANA</abbr> e
+        <abbr title="Instituto Brasileiro de Geografia e Estatística">IBGE</abbr>.
+      </p>
+    </section>
+
+  </aside>
+
+  <!-- ─── RODAPÉ ─── -->
+  <footer>
+    <p>
+      <small>
+        Datum: <strong>SIRGAS 2000</strong> |
+        Escala de referência: <strong>1:250.000</strong> |
+        Atualizado em: <time datetime="2024-01-15">15 de janeiro de 2024</time>
+      </small>
+    </p>
+    <p>
+      <small>
+        Dados:
+        <a href="https://www.snirh.gov.br" target="_blank" rel="noopener noreferrer">ANA/SNIRH</a> |
+        Licença:
+        <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noopener noreferrer">CC BY 4.0</a>
+      </small>
+    </p>
+  </footer>
+
+</body>
+</html>

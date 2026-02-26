@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NDVI — Exercício 2.B: Marcação Semântica</title>
+</head>
+<body>
+
+  <!--
+    Exercício 2.B — Texto original (sem marcação):
+
+    NDVI - O Índice de Vegetação por Diferença Normalizada
+    O NDVI (Normalized Difference Vegetation Index) é um índice que varia de -1 a +1.
+    Valores acima de 0,6 indicam vegetação densa e saudável. ATENÇÃO: valores negativos
+    geralmente indicam superfícies de água ou nuvens. A fórmula é: (NIR - Red) / (NIR + Red).
+
+    Tags aplicadas e justificativas:
+    - <h1>: título principal da página
+    - <abbr title="...">: siglas com expansão no atributo title (NDVI, NIR, Red)
+    - <em>: ênfase no intervalo de variação e nos tipos de superfície
+    - <mark>: valor de referência relevante (0,6) — destaque informativo
+    - <strong>: alerta "ATENÇÃO" — importância crítica
+    - <code>: fórmula matemática — conteúdo de código/expressão técnica
+  -->
+
+  <h1>
+    <abbr title="Normalized Difference Vegetation Index — Índice de Vegetação por Diferença Normalizada">NDVI</abbr>
+    — O Índice de Vegetação por Diferença Normalizada
+  </h1>
+
+  <p>
+    O <abbr title="Normalized Difference Vegetation Index">NDVI</abbr> é um índice que varia
+    de <em>−1 a +1</em>. Valores acima de <mark>0,6</mark> indicam
+    <em>vegetação densa e saudável</em>. <strong>ATENÇÃO:</strong> valores negativos
+    geralmente indicam superfícies de <em>água ou nuvens</em>. A fórmula é:
+    <code>
+      (<abbr title="Near-Infrared — Infravermelho Próximo">NIR</abbr>
+      −
+      <abbr title="Red — Banda do Vermelho Visível">Red</abbr>)
+      /
+      (<abbr title="Near-Infrared — Infravermelho Próximo">NIR</abbr>
+      +
+      <abbr title="Red — Banda do Vermelho Visível">Red</abbr>)
+    </code>.
+  </p>
+
+</body>
+</html>

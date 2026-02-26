@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Visualizador estático de recursos hídricos da Paraíba — Disciplina WebGIS IFPB">
+  <meta name="author" content="Laboratório de Geoprocessamento — IFPB">
+  <title>Visualizador WebGIS — Recursos Hídricos da Paraíba</title>
+  <link rel="stylesheet" href="css/estilos.css">
+</head>
+<body>
+
+  <!-- ─── CABEÇALHO ─── -->
+  <header>
+    <h1>Visualizador WebGIS</h1>
+    <p class="subtitulo">Recursos Hídricos da Paraíba — Dados ANA/IBGE 2022</p>
+  </header>
+
+  <!-- ─── NAVEGAÇÃO PRINCIPAL ─── -->
+  <nav aria-label="Navegação principal">
+    <ul>
+      <li><a href="#mapa-estatico">Mapa</a></li>
+      <li><a href="#legenda">Legenda</a></li>
+      <li><a href="#atributos">Atributos</a></li>
+      <li><a href="#consulta">Consulta</a></li>
+      <li><a href="#sobre">Sobre</a></li>
+    </ul>
+  </nav>
+
+  <!-- ─── CONTEÚDO PRINCIPAL ─── -->
+  <main aria-label="Área principal do visualizador de mapas">
+
+    <article id="mapa-estatico">
+      <h2>Bacias Hidrográficas da Paraíba</h2>
+      <figure>
+        <img
+          src="https://placehold.co/900x600/1565c0/ffffff?text=Bacias+Hidrograficas+PB+2022"
+          alt="Mapa temático das bacias hidrográficas da Paraíba em 2022. A bacia do
+               Piancó-Piranhas-Açu ocupa o sertão ao norte em azul escuro. A bacia do
+               Rio Paraíba percorre o centro-sul em azul médio. As bacias costeiras
+               orientais aparecem em azul claro junto ao litoral."
+          width="900"
+          height="600"
+          loading="lazy"
+        >
+        <figcaption>
+          Figura 1 — Bacias Hidrográficas da Paraíba, 2022.
+          Fonte: <strong>ANA</strong> / <strong>IBGE</strong>.
+          Projeção: <abbr title="Sistema de Referência Geocêntrico para as Américas">SIRGAS</abbr>
+          2000 — <code>EPSG:4674</code>. Escala: <strong>1:750.000</strong>.
+        </figcaption>
+      </figure>
+    </article>
+
+    <!-- Formulário de filtros (Módulo 6 integrado) -->
+    <section id="consulta">
+      <h2>Consultar Feição</h2>
+      <form action="/api/filtro" method="get">
+        <fieldset>
+          <legend>Filtros de Camada</legend>
+
+          <label for="busca-nome">Buscar por nome:</label>
+          <input
+            type="text"
+            id="busca-nome"
+            name="nome"
+            placeholder="Ex: Rio Paraíba"
+            autocomplete="off"
+          >
+
+          <label for="categoria">Categoria:</label>
+          <select id="categoria" name="categoria">
+            <option value="">— Todas as categorias —</option>
+            <option value="rio-perene">Rio Perene</option>
+            <option value="rio-intermitente">Rio Intermitente</option>
+            <option value="reservatorio">Reservatório / Açude</option>
+            <option value="bacia">Bacia Hidrográfica</option>
+          </select>
+
+          <label for="opacidade">
+            Opacidade da camada:
+            <output for="opacidade" id="val-opacidade">100</output>%
+          </label>
+          <input
+            type="range"
+            id="opacidade"
+            name="opacidade"
+            min="0"
+            max="100"
+            step="10"
+            value="100"
+          >
+        </fieldset>
+
+        <button type="submit">Aplicar</button>
+        <button type="reset">Limpar</button>
+      </form>
+    </section>
+
+  </main>
+
+  <!-- ─── CONTEÚDO LATERAL ─── -->
+  <aside aria-label="Legenda e informações complementares">
+
+    <!-- Legenda com cores (Exercício 7.A) -->
+    <section id="legenda">
+      <h2>Legenda</h2>
+      <ul class="lista-legenda">
+        <li>
+          <span class="cor-legenda legenda-rio-perene"></span>
+          Rio Perene
+        </li>
+        <li>
+          <span class="cor-legenda legenda-rio-intermitente"></span>
+          Rio Intermitente
+        </li>
+        <li>
+          <span class="cor-legenda legenda-reservatorio"></span>
+          Reservatório / Açude
+        </li>
+        <li>
+          <span class="cor-legenda legenda-bacia"></span>
+          Bacia Hidrográfica
+        </li>
+        <li>
+          <span class="cor-legenda legenda-urbana"></span>
+          Área Urbana
+        </li>
+      </ul>
+    </section>
+
+    <!-- Tabela de atributos (Módulo 4 integrado) -->
+    <section id="atributos">
+      <h2>Tabela de Atributos</h2>
+      <table>
+        <caption>Principais reservatórios monitorados — ANA/AESA, 2023</caption>
+        <thead>
+          <tr>
+            <th scope="col">Reservatório</th>
+            <th scope="col">Cap. (hm³)</th>
+            <th scope="col">Vol. (%)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Coremas</td>
+            <td>1.358,4</td>
+            <td>61,8</td>
+          </tr>
+          <tr>
+            <td>Boqueirão</td>
+            <td>411,7</td>
+            <td>42,5</td>
+          </tr>
+          <tr>
+            <td>Eng. Ávidos</td>
+            <td>255,0</td>
+            <td>38,2</td>
+          </tr>
+          <tr>
+            <td>São Gonçalo</td>
+            <td>44,6</td>
+            <td>75,3</td>
+          </tr>
+          <tr>
+            <td>Sumé</td>
+            <td>44,2</td>
+            <td>29,7</td>
+          </tr>
+        </tbody>
+        <tfoot>
+          <tr>
+            <td><strong>Total</strong></td>
+            <td><strong>2.113,9</strong></td>
+            <td>—</td>
+          </tr>
+        </tfoot>
+      </table>
+    </section>
+
+    <!-- Sobre o projeto -->
+    <section id="sobre">
+      <h2>Sobre o Projeto</h2>
+      <p>
+        Visualizador desenvolvido como projeto da disciplina de
+        <strong>WebGIS</strong> no curso de
+        <abbr title="Tecnologia em Geoprocessamento">Tecnologia em Geoprocessamento</abbr>
+        — <abbr title="Instituto Federal da Paraíba">IFPB</abbr>.
+      </p>
+      <dl>
+        <dt>Dados</dt>
+        <dd>
+          <a href="https://www.snirh.gov.br" target="_blank" rel="noopener noreferrer">ANA/SNIRH</a>
+          e IBGE
+        </dd>
+        <dt>Licença</dt>
+        <dd>
+          <a href="https://creativecommons.org/licenses/by/4.0/"
+             target="_blank"
+             rel="noopener noreferrer">CC BY 4.0</a>
+        </dd>
+      </dl>
+    </section>
+
+  </aside>
+
+  <!-- ─── RODAPÉ ─── -->
+  <footer>
+    <p>
+      <small>
+        Datum: <strong>SIRGAS 2000</strong> |
+        Escala: <strong>1:750.000</strong> |
+        Atualizado em: <time datetime="2024-01-15">15 de janeiro de 2024</time>
+      </small>
+    </p>
+    <p>
+      <small>
+        Dados: ANA · IBGE · MapBiomas | Licença: CC BY 4.0
+        <!-- TODO: Validar HTML no https://validator.w3.org/ e CSS em https://jigsaw.w3.org/css-validator/ -->
+      </small>
+    </p>
+  </footer>
+
+</body>
+</html>

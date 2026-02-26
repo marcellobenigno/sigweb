@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Formulário de Metadados — Camada GIS</title>
+</head>
+<body>
+
+  <h1>Formulário de Metadados — Camada GIS</h1>
+  <p>
+    Preencha os campos abaixo para registrar os metadados de uma nova camada geoespacial,
+    seguindo o padrão
+    <abbr title="International Organization for Standardization">ISO</abbr> 19115.
+  </p>
+
+  <!-- enctype="multipart/form-data" necessário para upload de arquivos -->
+  <form action="/api/metadados" method="post" enctype="multipart/form-data">
+
+    <!-- Fieldset 1: Identificação -->
+    <fieldset>
+      <legend>Identificação da Camada</legend>
+
+      <label for="titulo">Título da Camada: <abbr title="Campo obrigatório">*</abbr></label>
+      <input
+        type="text"
+        id="titulo"
+        name="titulo"
+        placeholder="Ex: Rede Hidrográfica da Paraíba 2022"
+        maxlength="150"
+        required
+      >
+
+      <label for="resumo">Resumo / Descrição: <abbr title="Campo obrigatório">*</abbr></label>
+      <textarea
+        id="resumo"
+        name="resumo"
+        rows="5"
+        cols="60"
+        placeholder="Descreva o conteúdo, a abrangência geográfica e o propósito da camada..."
+        maxlength="1000"
+        required
+      ></textarea>
+
+      <label for="data-criacao">Data de Criação: <abbr title="Campo obrigatório">*</abbr></label>
+      <input
+        type="date"
+        id="data-criacao"
+        name="data_criacao"
+        min="1990-01-01"
+        required
+      >
+
+      <label for="escala">Escala Nominal — denominador (ex: 250000 para 1:250.000): <abbr title="Campo obrigatório">*</abbr></label>
+      <input
+        type="number"
+        id="escala"
+        name="escala"
+        min="1000"
+        max="10000000"
+        step="1000"
+        placeholder="250000"
+        required
+      >
+
+      <label for="src">Sistema de Referência de Coordenadas: <abbr title="Campo obrigatório">*</abbr></label>
+      <select id="src" name="src" required>
+        <option value="">— Selecione o SRC —</option>
+        <option value="EPSG:4674">EPSG:4674 — SIRGAS 2000 (geográfico)</option>
+        <option value="EPSG:4326">EPSG:4326 — WGS 84 (geográfico)</option>
+        <option value="EPSG:31984">EPSG:31984 — SIRGAS 2000 / UTM Zone 24S</option>
+        <option value="EPSG:31985">EPSG:31985 — SIRGAS 2000 / UTM Zone 25S</option>
+      </select>
+    </fieldset>
+
+    <!-- Fieldset 2: Arquivos e Responsável -->
+    <fieldset>
+      <legend>Arquivos e Contato</legend>
+
+      <!-- Upload aceita apenas imagens -->
+      <label for="thumbnail">Imagem de Pré-visualização (thumbnail):</label>
+      <input
+        type="file"
+        id="thumbnail"
+        name="thumbnail"
+        accept="image/png,image/jpeg,image/webp"
+      >
+      <small>Formatos aceitos: PNG, JPEG, WebP. Tamanho máximo recomendado: 2 MB.</small>
+
+      <!-- Email com validação nativa HTML5 -->
+      <label for="email-responsavel">
+        E-mail do Responsável: <abbr title="Campo obrigatório">*</abbr>
+      </label>
+      <input
+        type="email"
+        id="email-responsavel"
+        name="email"
+        placeholder="nome@instituicao.gov.br"
+        required
+      >
+    </fieldset>
+
+    <button type="submit">Salvar Metadados</button>
+    <button type="reset">Limpar Formulário</button>
+
+  </form>
+
+</body>
+</html>

@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Consulta Espacial — Municípios do Nordeste</title>
+</head>
+<body>
+
+  <h1>Consulta a Banco de Dados Espacial</h1>
+  <p>Preencha os campos abaixo para filtrar feições geoespaciais por atributo.</p>
+
+  <form action="/api/consulta-espacial" method="get">
+
+    <!-- Fieldset 1: Identificação do município -->
+    <fieldset>
+      <legend>Filtro por Município</legend>
+
+      <!-- Campo de texto: apenas letras e espaços (pattern), obrigatório -->
+      <label for="nome-municipio">Nome do Município:</label>
+      <input
+        type="text"
+        id="nome-municipio"
+        name="municipio"
+        placeholder="Ex: Campina Grande"
+        pattern="[A-Za-zÀ-ÖØ-öø-ÿ\s]+"
+        title="Digite apenas letras e espaços — sem números ou caracteres especiais"
+        maxlength="100"
+        autocomplete="off"
+        required
+      >
+
+      <!-- Campo numérico: população mínima -->
+      <label for="populacao-min">População mínima (habitantes):</label>
+      <input
+        type="number"
+        id="populacao-min"
+        name="pop_min"
+        min="0"
+        step="1000"
+        value="0"
+        placeholder="0"
+      >
+
+      <!-- Select com mesorregiões agrupadas por estado via <optgroup> -->
+      <label for="mesorregiao">Mesorregião:</label>
+      <select id="mesorregiao" name="mesorregiao">
+        <option value="">— Selecione —</option>
+        <optgroup label="Paraíba">
+          <option value="pb-sertao">Sertão Paraibano</option>
+          <option value="pb-borborema">Borborema</option>
+          <option value="pb-agreste">Agreste Paraibano</option>
+          <option value="pb-mata">Mata Paraibana</option>
+        </optgroup>
+        <optgroup label="Pernambuco">
+          <option value="pe-sertao">Sertão Pernambucano</option>
+          <option value="pe-agreste">Agreste Pernambucano</option>
+          <option value="pe-mata">Mata Pernambucana</option>
+          <option value="pe-rmr">Região Metropolitana do Recife</option>
+        </optgroup>
+        <optgroup label="Ceará">
+          <option value="ce-noroeste">Noroeste Cearense</option>
+          <option value="ce-norte">Norte Cearense</option>
+          <option value="ce-metropolitano">Metropolitano de Fortaleza</option>
+          <option value="ce-sertoes">Sertões Cearenses</option>
+        </optgroup>
+        <optgroup label="Rio Grande do Norte">
+          <option value="rn-oeste">Oeste Potiguar</option>
+          <option value="rn-central">Central Potiguar</option>
+          <option value="rn-agreste">Agreste Potiguar</option>
+          <option value="rn-leste">Leste Potiguar</option>
+        </optgroup>
+      </select>
+    </fieldset>
+
+    <!-- Fieldset 2: Tipo de dado geoespacial (checkboxes — múltipla escolha) -->
+    <fieldset>
+      <legend>Tipo de Dado Geoespacial</legend>
+
+      <label>
+        <input type="checkbox" name="tipos" value="pontos" checked>
+        Pontos (ex: sedes municipais, postos pluviométricos)
+      </label>
+      <label>
+        <input type="checkbox" name="tipos" value="linhas">
+        Linhas (ex: rios, rodovias, ferrovias)
+      </label>
+      <label>
+        <input type="checkbox" name="tipos" value="poligonos">
+        Polígonos (ex: municípios, bacias hidrográficas, zonas de uso do solo)
+      </label>
+    </fieldset>
+
+    <button type="submit">Consultar</button>
+    <button type="reset">Limpar</button>
+
+  </form>
+
+</body>
+</html>

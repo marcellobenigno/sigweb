@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Visualizador WebGIS — Recursos Hídricos da Paraíba">
+  <meta name="author" content="João Silva">
+  <title>WebGIS — Recursos Hídricos da Paraíba</title>
+</head>
+<body>
+
+  <!--
+    Exercício 5.A — Auditoria Semântica
+    ─────────────────────────────────────────────────────────────────────────
+    Este arquivo é a versão semântica do index.html construído nos módulos
+    anteriores. Cada substituição de <div> por tag semântica está comentada.
+
+    Substituições realizadas:
+      <div id="cabecalho">   → <header>    (papel: cabeçalho da página)
+      <div id="menu">        → <nav>       (papel: bloco de navegação principal)
+      <div id="conteudo">    → <main>      (papel: conteúdo central e único da página)
+      <div id="mapa">        → <article>   (papel: conteúdo auto-contido e reutilizável)
+      <div id="filtros">     → <section>   (papel: grupo temático com título próprio)
+      <div id="lateral">     → <aside>     (papel: conteúdo complementar ao main)
+      <div id="legenda-div"> → <section>   (papel: subseção da aside com título)
+      <div id="rodape">      → <footer>    (papel: metadados e links secundários)
+    ─────────────────────────────────────────────────────────────────────────
+  -->
+
+  <!-- ANTES: <div id="cabecalho">  →  DEPOIS: <header> -->
+  <!-- Justificativa: contém o título principal e o subtítulo da página. -->
+  <header>
+    <h1>Visualizador WebGIS — Recursos Hídricos da Paraíba</h1>
+    <p>Projeto WebGIS | IFPB — Tecnologia em Geoprocessamento</p>
+  </header>
+
+  <!-- ANTES: <div id="menu">  →  DEPOIS: <nav> -->
+  <!-- Justificativa: bloco de links de navegação. aria-label diferencia -->
+  <!-- múltiplos <nav> na página para leitores de tela.                  -->
+  <nav aria-label="Navegação principal da página">
+    <ul>
+      <li><a href="#mapa-estatico">Mapa</a></li>
+      <li><a href="#legenda">Legenda</a></li>
+      <li><a href="#atributos">Atributos</a></li>
+      <li><a href="#sobre">Sobre</a></li>
+    </ul>
+  </nav>
+
+  <!-- ANTES: <div id="conteudo">  →  DEPOIS: <main> -->
+  <!-- Justificativa: conteúdo central e único da página. Apenas 1 por página. -->
+  <main aria-label="Área principal do visualizador de mapas">
+
+    <!-- ANTES: <div id="mapa">  →  DEPOIS: <article> -->
+    <!-- Justificativa: o mapa é conteúdo auto-contido que faz sentido fora de contexto. -->
+    <article id="mapa-estatico">
+      <h2>Bacias Hidrográficas da Paraíba</h2>
+
+      <figure>
+        <img
+          src="https://placehold.co/900x600/1565c0/ffffff?text=Bacias+Hidrograficas+PB"
+          alt="Mapa das bacias hidrográficas da Paraíba. Bacia do Piancó-Piranhas-Açu
+               ao norte em azul escuro; bacia do Rio Paraíba ao centro-sul em azul médio;
+               bacias costeiras orientais em azul claro."
+          width="900"
+          height="600"
+          loading="lazy"
+        >
+        <figcaption>
+          Figura 1 — Bacias Hidrográficas da Paraíba, 2022.
+          Fonte: <strong>ANA</strong> / <strong>IBGE</strong>.
+          Projeção: <abbr title="Sistema de Referência Geocêntrico para as Américas">SIRGAS</abbr>
+          2000 — <code>EPSG:4674</code>.
+        </figcaption>
+      </figure>
+
+      <h2>Fonte dos Dados</h2>
+      <p>
+        Dados fornecidos pela
+        <strong><abbr title="Agência Nacional de Águas e Saneamento Básico">ANA</abbr></strong>
+        e pelo
+        <strong><abbr title="Instituto Brasileiro de Geografia e Estatística">IBGE</abbr></strong>.
+        Sistema de referência: <code>EPSG:4674</code>
+        (<abbr title="Sistema de Referência Geocêntrico para as Américas">SIRGAS</abbr> 2000).
+      </p>
+
+      <h2>Sistema de Referência</h2>
+      <p>
+        Projeção geográfica: <strong>SIRGAS 2000</strong> — <code>EPSG:4674</code><br>
+        Área coberta: 56.500 km<sup>2</sup> (estado da Paraíba)
+      </p>
+    </article>
+
+    <!-- ANTES: <div id="filtros">  →  DEPOIS: <section> -->
+    <!-- Justificativa: grupo temático com título próprio. Deve ter <h2>-<h6>. -->
+    <section id="consulta">
+      <h2>Consultar Feição</h2>
+      <p>Selecione uma feição no mapa para exibir seus atributos.</p>
+      <!-- TODO: formulário de consulta será adicionado no Módulo 6 -->
+    </section>
+
+  </main>
+
+  <!-- ANTES: <div id="lateral">  →  DEPOIS: <aside> -->
+  <!-- Justificativa: conteúdo relacionado mas secundário (legenda, sobre). -->
+  <aside aria-label="Legenda e informações complementares">
+
+    <!-- ANTES: <div id="legenda-div">  →  DEPOIS: <section> -->
+    <!-- Justificativa: subseção temática dentro do aside. Tem título próprio. -->
+    <section id="legenda">
+      <h2>Legenda</h2>
+      <ul>
+        <li>🔵 Rios Perenes</li>
+        <li>🟡 Rios Intermitentes</li>
+        <li>💧 Açudes e Reservatórios</li>
+        <li>🟩 Área de Preservação Permanente</li>
+        <li>⬛ Limite de Bacia Hidrográfica</li>
+      </ul>
+    </section>
+
+    <section id="sobre">
+      <h2>Sobre o Projeto</h2>
+      <p>
+        Visualizador desenvolvido como projeto da disciplina de
+        <strong>WebGIS</strong> no curso de
+        <abbr title="Tecnologia em Geoprocessamento">Tecnologia em Geoprocessamento</abbr>
+        — <abbr title="Instituto Federal da Paraíba">IFPB</abbr>.
+      </p>
+    </section>
+
+  </aside>
+
+  <!-- ANTES: <div id="rodape">  →  DEPOIS: <footer> -->
+  <!-- Justificativa: metadados de autoria, datum e links secundários. -->
+  <footer>
+    <p>
+      <small>
+        Datum: <strong>SIRGAS 2000</strong> |
+        Escala de referência: <strong>1:250.000</strong> |
+        Atualizado em: <time datetime="2024-01-15">15 de janeiro de 2024</time>
+      </small>
+    </p>
+    <p>
+      <small>
+        Dados: <a href="https://www.snirh.gov.br" target="_blank" rel="noopener noreferrer">ANA/SNIRH</a> |
+        Licença: <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noopener noreferrer">CC BY 4.0</a>
+      </small>
+    </p>
+  </footer>
+
+</body>
+</html>

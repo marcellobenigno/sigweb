@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Camada — Hidrografia da Paraíba</title>
+</head>
+<body>
+
+  <h1>Hidrografia da Paraíba</h1>
+
+  <h2>Descrição</h2>
+  <p>
+    Camada vetorial representando a rede hidrográfica do estado da Paraíba, incluindo rios
+    perenes, intermitentes, açudes e reservatórios. Os dados integram informações produzidas
+    pela <abbr title="Agência Nacional de Águas e Saneamento Básico">ANA</abbr> e pelo
+    <abbr title="Instituto Brasileiro de Geografia e Estatística">IBGE</abbr>, com referência
+    ao ano hidrológico de 2022. A camada é indicada para análises regionais de disponibilidade
+    hídrica, delimitação de bacias e planejamento territorial no Semiárido.
+  </p>
+
+  <h2>Especificações Técnicas</h2>
+  <p>
+    O formato principal de distribuição é <strong>Shapefile (.shp)</strong>, com geometria do
+    tipo <em>MultiLineString</em> para cursos d'água e <em>MultiPolygon</em> para corpos
+    hídricos (açudes e reservatórios). A escala de captura é <strong>1:250.000</strong>,
+    adequada para análises regionais e planejamento de bacias hidrográficas.
+  </p>
+  <p>
+    O sistema de referência é o
+    <abbr title="Sistema de Referência Geocêntrico para as Américas">SIRGAS</abbr> 2000
+    (<code>EPSG:4674</code>). Os principais atributos da tabela são: <strong>NM_RIO</strong>
+    (nome do curso d'água), <strong>ORDEM</strong> (ordem de Strahler) e
+    <strong>COMP_KM</strong> (comprimento em km). A
+    <abbr title="Unidade de Gerenciamento de Recursos Hídricos">UGRH</abbr> é identificada
+    pelo campo <strong>CD_UGRH</strong>.
+  </p>
+
+  <h2>Sistema de Referência</h2>
+  <p>
+    Sistema geodésico de referência: <strong>SIRGAS 2000</strong> — <code>EPSG:4674</code><br>
+    Extensão geográfica da camada (bounding box):<br>
+    Longitude Oeste (W): −38,7°<br>
+    Longitude Leste (E): −34,8°<br>
+    Latitude Sul (S): −8,3°<br>
+    Latitude Norte (N): −6,0°<br>
+    Altitude média da bacia do Rio Paraíba: 400 m<sup>*</sup> acima do nível do mar
+  </p>
+  <p>
+    A área total mapeada abrange aproximadamente 56.500 km<sup>2</sup>,
+    com concentração de CO<sub>2</sub> atmosférico monitorada em estações
+    da <abbr title="Rede Brasileira de Monitoramento Ambiental">RBMA</abbr>.
+  </p>
+  <p>
+    <small>
+      * Altitude derivada de modelo digital de elevação
+      <abbr title="Shuttle Radar Topography Mission">SRTM</abbr> de 30 m de resolução.
+    </small>
+  </p>
+
+</body>
+</html>
