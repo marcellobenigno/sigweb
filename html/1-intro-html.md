@@ -1280,6 +1280,15 @@ tr:nth-child(even) {
 }
 ```
 
+`:nth-child(even)` seleciona **filhos em posições pares** (2º, 4º, 6º...). Outros padrões úteis:
+
+| Seletor | Seleciona |
+|---|---|
+| `:nth-child(even)` | linhas 2, 4, 6... |
+| `:nth-child(odd)` | linhas 1, 3, 5... |
+| `:nth-child(3n)` | linhas 3, 6, 9... |
+| `:nth-child(2n+1)` | mesmo que `odd` |
+
 ---
 
 #### O Modelo de Caixas (Box Model)
@@ -1363,6 +1372,31 @@ Flexbox é ideal para disposição de elementos em uma **única direção** (lin
 </div>
 ```
 
+O resultado visual do Flexbox acima:
+
+```
+┌─────────────────────────────────────┐
+│  .painel-webgis  (flex container)   │
+│  ┌────────────┐  ┌───────────────┐  │
+│  │   #map     │  │ .painel-lat.  │  │
+│  │  flex: 1   │  │ flex: 0 0 280 │  │
+│  │  (cresce)  │  │  (fixo 280px) │  │
+│  └────────────┘  └───────────────┘  │
+└─────────────────────────────────────┘
+```
+
+A propriedade `flex` é um atalho para três valores:
+
+```css
+flex: 1              /* cresce para preencher o espaço */
+flex: 0 0 280px      /* grow=0, shrink=0, basis=280px  */
+/*    ↑   ↑    ↑
+   cresce encolhe tamanho-base  */
+```
+
+- **`flex: 1`** no `#map` → ocupa **todo o espaço que sobra**
+- **`flex: 0 0 280px`** no painel → **largura fixa, nunca muda**
+
 ---
 
 #### Layout com CSS Grid
@@ -1392,7 +1426,44 @@ body > aside   { grid-area: aside; }
 body > footer  { grid-area: footer; }
 ```
 
-> **Grid vs Flexbox:** Use **Grid** para o layout macro da página (estrutura completa). Use **Flexbox** para o layout micro dos componentes internos (itens dentro da legenda, botões do formulário).
+O resultado visual do Grid acima:
+
+```
+┌──────────────────────────────────┐
+│           header                 │  ← auto
+├──────────────────────────────────┤
+│             nav                  │  ← auto
+├────────────────────┬─────────────┤
+│                    │             │
+│        map         │    aside    │  ← 1fr
+│     (1fr = resto)  │   (280px)   │
+│                    │             │
+├──────────────────────────────────┤
+│           footer                 │  ← auto
+└──────────────────────────────────┘
+  ←────── 1fr ──────→←── 280px ───→
+```
+
+**Como funciona cada parte:**
+
+- **`grid-template-areas`** — você "desenha" o layout com nomes; repetir o nome faz o elemento ocupar várias colunas (`"header header"`)
+- **`1fr`** — fração do espaço disponível (elástico, como `flex: 1`)
+- **`280px`** — coluna fixa, independente do tamanho da tela
+- **`auto`** nas linhas — altura determinada pelo próprio conteúdo
+- **`1fr`** na linha do mapa — ocupa todo o espaço vertical restante
+
+---
+
+**Grid vs Flexbox — quando usar cada um:**
+
+| | Flexbox | Grid |
+|---|---|---|
+| **Dimensões** | 1D (linha ou coluna) | 2D (linha + coluna) |
+| **Ideal para** | Componentes, navbars, cards | Layouts de página inteira |
+| **Controle** | Os filhos se organizam | Você define a estrutura |
+| **Exemplo WebGIS** | Ícone + rótulo na legenda | Header + Mapa + Sidebar + Footer |
+
+> **Regra prática:** use **Grid** para o esqueleto da página, **Flexbox** para organizar os elementos dentro de cada seção.
 
 ---
 
