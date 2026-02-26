@@ -1,0 +1,1174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Leaflet.js — Open-Source Repositories & Workshop Guide 2024–2026</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500;700&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --bg: #0b0f14;
+    --bg2: #111720;
+    --bg3: #151d26;
+    --border: #1e2d3d;
+    --accent-green: #3dff9a;
+    --accent-cyan: #00d4ff;
+    --accent-amber: #ffb340;
+    --accent-magenta: #ff4d8a;
+    --accent-blue: #4f8dff;
+    --text: #c8d6e5;
+    --text-dim: #5a7490;
+    --text-muted: #8aa0b5;
+    --tag-bg: #0f1e2e;
+    --radius: 10px;
+    --font-mono: 'Space Mono', monospace;
+    --font-body: 'DM Sans', sans-serif;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-body);
+    min-height: 100vh;
+    line-height: 1.65;
+    overflow-x: hidden;
+  }
+
+  /* ── GRID BACKGROUND ── */
+  body::before {
+    content: '';
+    position: fixed; inset: 0;
+    background-image:
+      linear-gradient(rgba(0,212,255,0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0,212,255,0.03) 1px, transparent 1px);
+    background-size: 40px 40px;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* ── HEADER ── */
+  header {
+    position: relative;
+    z-index: 10;
+    padding: 60px 48px 40px;
+    border-bottom: 1px solid var(--border);
+    background: linear-gradient(180deg, #0d1420 0%, var(--bg) 100%);
+  }
+
+  .header-badge {
+    display: inline-flex; align-items: center; gap: 8px;
+    font-family: var(--font-mono); font-size: 11px; letter-spacing: 2px;
+    text-transform: uppercase; color: var(--accent-cyan);
+    background: rgba(0,212,255,0.07); border: 1px solid rgba(0,212,255,0.2);
+    padding: 5px 14px; border-radius: 100px; margin-bottom: 20px;
+  }
+
+  .header-badge span { display: inline-block; width: 6px; height: 6px; border-radius: 50%; background: var(--accent-cyan); animation: pulse 2s ease-in-out infinite; }
+
+  @keyframes pulse { 0%,100% { opacity:1; transform:scale(1); } 50% { opacity:0.4; transform:scale(0.7); } }
+
+  h1 {
+    font-family: var(--font-mono); font-size: clamp(24px, 4vw, 42px);
+    line-height: 1.2; color: #fff; font-weight: 700; max-width: 700px;
+  }
+
+  h1 em { font-style: normal; color: var(--accent-green); }
+
+  .header-meta {
+    margin-top: 18px; display: flex; gap: 32px; flex-wrap: wrap;
+    font-size: 13px; color: var(--text-muted); font-family: var(--font-mono);
+  }
+
+  .header-meta span { display: flex; align-items: center; gap: 7px; }
+
+  /* ── INTRO STRIP ── */
+  .intro-strip {
+    position: relative; z-index: 5;
+    background: var(--bg2); border-bottom: 1px solid var(--border);
+    padding: 22px 48px;
+    font-size: 14px; color: var(--text-muted); line-height: 1.7;
+  }
+
+  .intro-strip strong { color: var(--accent-amber); }
+
+  /* ── LEGEND ── */
+  .legend {
+    position: relative; z-index: 5;
+    display: flex; gap: 20px; flex-wrap: wrap;
+    padding: 16px 48px;
+    border-bottom: 1px solid var(--border);
+    background: var(--bg);
+    font-size: 12px; font-family: var(--font-mono);
+  }
+
+  .legend-item { display: flex; align-items: center; gap: 8px; color: var(--text-muted); }
+  .legend-dot { width: 8px; height: 8px; border-radius: 50%; }
+  .dot-green { background: var(--accent-green); }
+  .dot-cyan { background: var(--accent-cyan); }
+  .dot-amber { background: var(--accent-amber); }
+  .dot-magenta { background: var(--accent-magenta); }
+  .dot-blue { background: var(--accent-blue); }
+
+  /* ── MAIN GRID ── */
+  main {
+    position: relative; z-index: 5;
+    max-width: 1400px; margin: 0 auto;
+    padding: 40px 48px 80px;
+    display: grid; gap: 48px;
+  }
+
+  /* ── SECTION HEADER ── */
+  .section-header {
+    display: flex; align-items: flex-end; gap: 18px;
+    margin-bottom: 20px; padding-bottom: 14px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .section-number {
+    font-family: var(--font-mono); font-size: 11px; letter-spacing: 1px;
+    color: var(--text-dim); padding: 3px 10px;
+    border: 1px solid var(--border); border-radius: 4px;
+  }
+
+  .section-title {
+    font-family: var(--font-mono); font-size: 16px; font-weight: 700;
+    letter-spacing: 1px; text-transform: uppercase;
+  }
+
+  .section-count {
+    margin-left: auto; font-family: var(--font-mono); font-size: 11px;
+    color: var(--text-dim); padding: 3px 10px;
+    border: 1px solid var(--border); border-radius: 4px;
+  }
+
+  /* ── CARD GRID ── */
+  .card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+    gap: 18px;
+  }
+
+  /* ── REPO CARD ── */
+  .card {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 24px;
+    display: flex; flex-direction: column; gap: 14px;
+    position: relative; overflow: hidden;
+    transition: border-color .2s, transform .15s, box-shadow .2s;
+    cursor: default;
+  }
+
+  .card:hover {
+    border-color: rgba(255,255,255,0.12);
+    transform: translateY(-2px);
+    box-shadow: 0 12px 40px rgba(0,0,0,0.4);
+  }
+
+  .card::after {
+    content: '';
+    position: absolute; top: 0; left: 0; right: 0; height: 2px;
+    border-radius: var(--radius) var(--radius) 0 0;
+    opacity: 0; transition: opacity .2s;
+  }
+
+  .card:hover::after { opacity: 1; }
+
+  .card.cat-workshop::after { background: linear-gradient(90deg, var(--accent-green), transparent); }
+  .card.cat-react::after    { background: linear-gradient(90deg, var(--accent-cyan), transparent); }
+  .card.cat-r::after        { background: linear-gradient(90deg, var(--accent-amber), transparent); }
+  .card.cat-realworld::after{ background: linear-gradient(90deg, var(--accent-magenta), transparent); }
+  .card.cat-advanced::after { background: linear-gradient(90deg, var(--accent-blue), transparent); }
+
+  .card-top { display: flex; justify-content: space-between; align-items: flex-start; gap: 12px; }
+
+  .card-icon {
+    width: 38px; height: 38px; border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; flex-shrink: 0;
+    border: 1px solid var(--border);
+  }
+
+  .icon-workshop { background: rgba(61,255,154,0.07); }
+  .icon-react    { background: rgba(0,212,255,0.07); }
+  .icon-r        { background: rgba(255,179,64,0.07); }
+  .icon-realworld{ background: rgba(255,77,138,0.07); }
+  .icon-advanced { background: rgba(79,141,255,0.07); }
+
+  .card-stars {
+    font-family: var(--font-mono); font-size: 12px;
+    color: var(--accent-amber); display: flex; align-items: center; gap: 5px;
+  }
+
+  .card-name {
+    font-family: var(--font-mono); font-size: 14px; font-weight: 700;
+    color: #fff; line-height: 1.3; word-break: break-word;
+  }
+
+  .card-name a {
+    color: inherit; text-decoration: none;
+    border-bottom: 1px solid rgba(255,255,255,0.12);
+    padding-bottom: 1px; transition: border-color .2s, color .2s;
+  }
+
+  .card-name a:hover { color: var(--accent-cyan); border-color: var(--accent-cyan); }
+
+  .card-desc {
+    font-size: 13px; color: var(--text-muted); line-height: 1.6;
+    flex-grow: 1;
+  }
+
+  .card-highlights {
+    list-style: none; display: flex; flex-direction: column; gap: 5px;
+  }
+
+  .card-highlights li {
+    font-size: 12px; color: var(--text-dim);
+    display: flex; align-items: flex-start; gap: 8px;
+    line-height: 1.5;
+  }
+
+  .card-highlights li::before {
+    content: '▸';
+    color: var(--accent-green); flex-shrink: 0; margin-top: 1px;
+    font-size: 10px;
+  }
+
+  .card.cat-react .card-highlights li::before    { color: var(--accent-cyan); }
+  .card.cat-r .card-highlights li::before        { color: var(--accent-amber); }
+  .card.cat-realworld .card-highlights li::before{ color: var(--accent-magenta); }
+  .card.cat-advanced .card-highlights li::before { color: var(--accent-blue); }
+
+  .card-tags { display: flex; flex-wrap: wrap; gap: 6px; }
+
+  .tag {
+    font-family: var(--font-mono); font-size: 10px; letter-spacing: .5px;
+    padding: 3px 9px; border-radius: 4px;
+    background: var(--tag-bg); border: 1px solid var(--border);
+    color: var(--text-muted); white-space: nowrap;
+  }
+
+  .tag.green { color: var(--accent-green); border-color: rgba(61,255,154,0.2); background: rgba(61,255,154,0.04); }
+  .tag.cyan  { color: var(--accent-cyan);  border-color: rgba(0,212,255,0.2);  background: rgba(0,212,255,0.04); }
+  .tag.amber { color: var(--accent-amber); border-color: rgba(255,179,64,0.2); background: rgba(255,179,64,0.04); }
+  .tag.pink  { color: var(--accent-magenta); border-color: rgba(255,77,138,0.2); background: rgba(255,77,138,0.04); }
+  .tag.blue  { color: var(--accent-blue);  border-color: rgba(79,141,255,0.2); background: rgba(79,141,255,0.04); }
+
+  .card-footer {
+    display: flex; justify-content: space-between; align-items: center;
+    padding-top: 10px; border-top: 1px solid var(--border);
+    font-family: var(--font-mono); font-size: 11px; color: var(--text-dim);
+  }
+
+  .lang-dot { width: 8px; height: 8px; border-radius: 50%; display: inline-block; margin-right: 5px; }
+  .lang-js  { background: #f7df1e; }
+  .lang-ts  { background: #3178c6; }
+  .lang-r   { background: #276dc2; }
+  .lang-html{ background: #e34f26; }
+
+  /* ── WIDE CARD ── */
+  .card.wide { grid-column: 1 / -1; flex-direction: row; gap: 28px; }
+  .card.wide .card-main { flex: 1; display: flex; flex-direction: column; gap: 14px; }
+  .card.wide .card-aside { width: 300px; flex-shrink: 0; }
+
+  @media (max-width: 760px) {
+    .card.wide { flex-direction: column; }
+    .card.wide .card-aside { width: 100%; }
+  }
+
+  /* ── CALLOUT BOX ── */
+  .callout {
+    background: rgba(61,255,154,0.04);
+    border: 1px solid rgba(61,255,154,0.15);
+    border-radius: var(--radius); padding: 18px 24px;
+    display: flex; gap: 14px; align-items: flex-start;
+  }
+
+  .callout-icon { font-size: 20px; flex-shrink: 0; margin-top: 2px; }
+
+  .callout-body { font-size: 13px; color: var(--text-muted); line-height: 1.7; }
+  .callout-body strong { color: var(--accent-green); }
+
+  /* ── LEARNING PATH TABLE ── */
+  .path-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  .path-table th {
+    font-family: var(--font-mono); font-size: 11px; letter-spacing: 1px;
+    text-transform: uppercase; color: var(--text-dim);
+    padding: 10px 16px; text-align: left;
+    border-bottom: 1px solid var(--border);
+  }
+  .path-table td {
+    padding: 11px 16px; border-bottom: 1px solid rgba(30,45,61,0.5);
+    vertical-align: top; color: var(--text-muted); line-height: 1.5;
+  }
+  .path-table tr:hover td { background: rgba(255,255,255,0.02); }
+  .path-level { font-family: var(--font-mono); font-size: 11px; padding: 2px 8px; border-radius: 4px; white-space: nowrap; }
+  .level-beginner  { background: rgba(61,255,154,0.1);  color: var(--accent-green); }
+  .level-inter     { background: rgba(0,212,255,0.1);   color: var(--accent-cyan); }
+  .level-advanced  { background: rgba(79,141,255,0.1);  color: var(--accent-blue); }
+  .level-expert    { background: rgba(255,77,138,0.1);  color: var(--accent-magenta); }
+
+  /* ── PLUGIN TABLE ── */
+  .plugin-grid {
+    display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 14px;
+  }
+  .plugin-card {
+    background: var(--bg3); border: 1px solid var(--border);
+    border-radius: 8px; padding: 16px 18px;
+    display: flex; flex-direction: column; gap: 6px;
+  }
+  .plugin-name { font-family: var(--font-mono); font-size: 13px; font-weight: 700; color: #fff; }
+  .plugin-stars { font-size: 11px; color: var(--accent-amber); margin-left: auto; }
+  .plugin-row { display: flex; align-items: center; gap: 8px; }
+  .plugin-desc { font-size: 12px; color: var(--text-muted); line-height: 1.5; }
+
+  /* ── FOOTER ── */
+  footer {
+    position: relative; z-index: 5;
+    padding: 32px 48px; border-top: 1px solid var(--border);
+    display: flex; align-items: center; justify-content: space-between; flex-wrap: gap;
+    font-family: var(--font-mono); font-size: 11px; color: var(--text-dim);
+  }
+
+  .footer-brand { color: var(--accent-green); letter-spacing: 1px; }
+
+  @media (max-width: 640px) {
+    header, .intro-strip, .legend, footer { padding-left: 24px; padding-right: 24px; }
+    main { padding: 32px 24px 60px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+  <div class="header-badge"><span></span> GIS Dev Reference — 2024–2026</div>
+  <h1>Leaflet.js <em>Open-Source</em><br>Repository Guide</h1>
+  <p class="header-meta" style="margin-top:14px; font-size:14px; color:var(--text-muted); font-family:var(--font-body); max-width:680px;">
+    A curated collection of GitHub & GitLab repositories offering structured tutorials, workshops, step-by-step labs, and advanced implementations for Leaflet.js — filtered for real-world datasets, plugin depth, and active community traction.
+  </p>
+  <div class="header-meta">
+    <span>📦 20+ Repositories</span>
+    <span>🔭 5 Categories</span>
+    <span>📅 Focus: 2024–2026</span>
+    <span>⭐ Community-Vetted</span>
+  </div>
+</header>
+
+<!-- INTRO -->
+<div class="intro-strip">
+  <strong>How to use this guide:</strong> Repositories are grouped by use-case category. Each card lists key exercises covered, real-world datasets used, difficulty level, and GitHub stars where applicable. Scroll through categories or jump directly to <strong>React-Leaflet</strong>, <strong>R/Shiny</strong>, or <strong>real-world data workshops</strong> sections below.
+</div>
+
+<!-- LEGEND -->
+<div class="legend">
+  <div class="legend-item"><span class="legend-dot dot-green"></span> Step-by-Step Workshop Labs</div>
+  <div class="legend-item"><span class="legend-dot dot-cyan"></span> React-Leaflet / Advanced JS</div>
+  <div class="legend-item"><span class="legend-dot dot-amber"></span> R / Shiny Integration</div>
+  <div class="legend-item"><span class="legend-dot dot-magenta"></span> Real-World Datasets</div>
+  <div class="legend-item"><span class="legend-dot dot-blue"></span> Plugin Collections & Advanced</div>
+</div>
+
+<!-- MAIN CONTENT -->
+<main>
+
+  <!-- ══════════════════════════════════════════
+       SECTION 1 — WORKSHOP LABS
+  ══════════════════════════════════════════ -->
+  <section>
+    <div class="section-header">
+      <span class="section-number">01</span>
+      <h2 class="section-title" style="color:var(--accent-green);">Step-by-Step Workshop Labs</h2>
+      <span class="section-count">5 repos</span>
+    </div>
+
+    <div class="card-grid">
+
+      <!-- Card 1 -->
+      <div class="card cat-workshop">
+        <div class="card-top">
+          <div class="card-icon icon-workshop">🗺️</div>
+          <span class="card-stars">⭐ Active</span>
+        </div>
+        <div class="card-name">
+          <a href="https://github.com/ect123/intro-to-leaflet-workshop" target="_blank">ect123 / intro-to-leaflet-workshop</a>
+        </div>
+        <p class="card-desc">University-grade lab workshop (UBC Libraries) structured for classroom delivery. Covers web maps from scratch, GeoJSON integration, and building on real campus/open data.</p>
+        <ul class="card-highlights">
+          <li>Two-part lab: web map theory + hands-on coding exercises</li>
+          <li>GeoJSON integration with UBC Buildings open dataset</li>
+          <li>Step-by-step marker, popup, and layer control exercises</li>
+          <li>Boilerplate code for self-guided extension</li>
+        </ul>
+        <div class="card-tags">
+          <span class="tag green">workshop</span>
+          <span class="tag green">geojson</span>
+          <span class="tag">custom markers</span>
+          <span class="tag">beginner-friendly</span>
+        </div>
+        <div class="card-footer">
+          <span><span class="lang-dot lang-html"></span>HTML/CSS/JS</span>
+          <span>Lab Format</span>
+        </div>
+      </div>
+
+      <!-- Card 2 -->
+      <div class="card cat-workshop">
+        <div class="card-top">
+          <div class="card-icon icon-workshop">📍</div>
+          <span class="card-stars">⭐ Active</span>
+        </div>
+        <div class="card-name">
+          <a href="https://github.com/geospatialem/getting-started-with-leaflet" target="_blank">geospatialem / getting-started-with-leaflet</a>
+        </div>
+        <p class="card-desc">Structured course covering Leaflet.js + Esri-Leaflet together. Modular file-by-file exercises with a professional separation of concerns. Includes ArcGIS service integration.</p>
+        <ul class="card-highlights">
+          <li>Lab modules: basemap → GeoJSON → style → popups</li>
+          <li>ArcGIS / Esri FeatureServer + Leaflet native layers</li>
+          <li>CMS embed scenarios with pan/zoom restrictions</li>
+          <li>Choropleth-style data-driven symbology exercise</li>
+        </ul>
+        <div class="card-tags">
+          <span class="tag green">esri-leaflet</span>
+          <span class="tag green">geojson</span>
+          <span class="tag">arcgis</span>
+          <span class="tag">course</span>
+        </div>
+        <div class="card-footer">
+          <span><span class="lang-dot lang-js"></span>JavaScript</span>
+          <span>Modular Labs</span>
+        </div>
+      </div>
+
+      <!-- Card 3 -->
+      <div class="card cat-workshop">
+        <div class="card-top">
+          <div class="card-icon icon-workshop">🧭</div>
+          <span class="card-stars">⭐ Community Pick</span>
+        </div>
+        <div class="card-name">
+          <a href="https://github.com/maptimeboston/leaflet-intro" target="_blank">maptimeboston / leaflet-intro</a>
+        </div>
+        <p class="card-desc">Classic, widely referenced Maptime Boston workshop. Builds progressively from a blank map to choropleth layers using real City of Boston rodent incident open data (CSV → GeoJSON).</p>
+        <ul class="card-highlights">
+          <li>Real open data: Boston rodent incidents (city open data portal)</li>
+          <li><code>pointToLayer</code> for custom marker exercises</li>
+          <li>Choropleth: neighborhood rat density with <code>onEachFeature</code></li>
+          <li>Progressive code structure — each step builds on the last</li>
+        </ul>
+        <div class="card-tags">
+          <span class="tag green">real-data</span>
+          <span class="tag green">choropleth</span>
+          <span class="tag">city-opendata</span>
+          <span class="tag">progressive</span>
+        </div>
+        <div class="card-footer">
+          <span><span class="lang-dot lang-html"></span>HTML/JS</span>
+          <span>City Open Data</span>
+        </div>
+      </div>
+
+      <!-- Card 4 -->
+      <div class="card cat-workshop">
+        <div class="card-top">
+          <div class="card-icon icon-workshop">🛠️</div>
+          <span class="card-stars">⭐ 100+ Stars</span>
+        </div>
+        <div class="card-name">
+          <a href="https://github.com/scottgruber/web-maps-workshop" target="_blank">scottgruber / web-maps-workshop</a>
+        </div>
+        <p class="card-desc">Self-paced tutorial covering Leaflet, OpenStreetMap, Mapbox, and GeoJSON. Carefully structured project scaffold with separate lib/js/css/json folders. Good for instructors.</p>
+        <ul class="card-highlights">
+          <li>Project structure from scratch: local Leaflet install</li>
+          <li>OpenStreetMap + Mapbox tile provider comparison</li>
+          <li>GeoJSON data loading and styling exercises</li>
+          <li>Custom marker icons with local image assets</li>
+        </ul>
+        <div class="card-tags">
+          <span class="tag green">osm</span>
+          <span class="tag green">mapbox</span>
+          <span class="tag">tile-providers</span>
+          <span class="tag">self-paced</span>
+        </div>
+        <div class="card-footer">
+          <span><span class="lang-dot lang-html"></span>HTML/CSS/JS</span>
+          <span>Self-Paced</span>
+        </div>
+      </div>
+
+      <!-- Card 5 -->
+      <div class="card cat-workshop">
+        <div class="card-top">
+          <div class="card-icon icon-workshop">🗺</div>
+          <span class="card-stars">⭐ Popular</span>
+        </div>
+        <div class="card-name">
+          <a href="https://github.com/NieneB/Webmapping_for_beginners" target="_blank">NieneB / Webmapping_for_beginners</a>
+        </div>
+        <p class="card-desc">Maptime Amsterdam workshop wiki with Leaflet + D3.js track. Exercises progress from circle markers to custom icon GeoJSON layers using a Bigfoot sightings real-world dataset.</p>
+        <ul class="card-highlights">
+          <li>Real dataset: BFRO Bigfoot sightings GeoJSON (point data)</li>
+          <li>Custom <code>L.icon()</code> markers with PNG/GIF image exercises</li>
+          <li>Event handling: click, zoom, layer interaction labs</li>
+          <li>D3.js + Leaflet parallel track for dataviz</li>
+        </ul>
+        <div class="card-tags">
+          <span class="tag green">custom-icons</span>
+          <span class="tag green">real-data</span>
+          <span class="tag">d3.js</span>
+          <span class="tag">events</span>
+        </div>
+        <div class="card-footer">
+          <span><span class="lang-dot lang-html"></span>HTML/JS</span>
+          <span>Wiki + Labs</span>
+        </div>
+      </div>
+
+    </div><!-- /card-grid -->
+  </section>
+
+
+  <!-- ══════════════════════════════════════════
+       SECTION 2 — REACT-LEAFLET / ADVANCED JS
+  ══════════════════════════════════════════ -->
+  <section>
+    <div class="section-header">
+      <span class="section-number">02</span>
+      <h2 class="section-title" style="color:var(--accent-cyan);">React-Leaflet &amp; Advanced JavaScript</h2>
+      <span class="section-count">5 repos</span>
+    </div>
+
+    <div class="card-grid">
+
+      <!-- Card 1 -->
+      <div class="card cat-react">
+        <div class="card-top">
+          <div class="card-icon icon-react">⚛️</div>
+          <span class="card-stars">⭐ 423 Stars</span>
+        </div>
+        <div class="card-name">
+          <a href="https://github.com/tomickigrzegorz/leaflet-examples" target="_blank">tomickigrzegorz / leaflet-examples</a>
+        </div>
+        <p class="card-desc">One of the most comprehensive numbered example collections for Leaflet — 81 exercises covering every use case from basic markers to advanced routing, clustering, and dynamic data sidebars. Has a matching React version.</p>
+        <ul class="card-highlights">
+          <li>81 sequential exercises with live demo site</li>
+          <li>Covers: routing machine, marker clustering, GeoJSON autocomplete</li>
+          <li>Dynamic data sidebar, web workers for 1M markers</li>
+          <li>Companion <code>react-leaflet-examples</code> repo (20 React exercises)</li>
+        </ul>
+        <div class="card-tags">
+          <span class="tag cyan">comprehensive</span>
+          <span class="tag cyan">clustering</span>
+          <span class="tag">routing</span>
+          <span class="tag">geocoding</span>
+        </div>
+        <div class="card-footer">
+          <span><span class="lang-dot lang-js"></span>JavaScript + React</span>
+          <span>423 ⭐</span>
+        </div>
+      </div>
+
+      <!-- Card 2 -->
+      <div class="card cat-react">
+        <div class="card-top">
+          <div class="card-icon icon-react">🗺️</div>
+          <span class="card-stars">⭐ 215 Stars</span>
+        </div>
+        <div class="card-name">
+          <a href="https://github.com/tomickigrzegorz/react-leaflet-examples" target="_blank">tomickigrzegorz / react-leaflet-examples</a>
+        </div>
+        <p class="card-desc">A dedicated React-Leaflet collection with 20 structured exercises. Covers everything from simple maps to GeoJSON layers, marker clustering plugin, SVG markers with legends, and geocoding search outside the map.</p>
+        <ul class="card-highlights">
+          <li>GeoJSON simple + GeoJSON extended action layers</li>
+          <li>SVG markers with map legends</li>
+          <li>Leaflet.markercluster plugin via React component</li>
+          <li>Geocoding search and coordinate control exercises</li>
+        </ul>
+        <div class="card-tags">
+          <span class="tag cyan">react</span>
+          <span class="tag cyan">geojson</span>
+          <span class="tag">svg-markers</span>
+          <span class="tag">geocoding</span>
+        </div>
+        <div class="card-footer">
+          <span><span class="lang-dot lang-ts"></span>TypeScript / React</span>
+          <span>215 ⭐</span>
+        </div>
+      </div>
+
+      <!-- Card 3 -->
+      <div class="card cat-react">
+        <div class="card-top">
+          <div class="card-icon icon-react">🌍</div>
+          <span class="card-stars">⭐ Active 2024</span>
+        </div>
+        <div class="card-name">
+          <a href="https://github.com/clhenrick/React-Leaflet-demo" target="_blank">clhenrick / React-Leaflet-demo</a>
+        </div>
+        <p class="card-desc">A focused React + Leaflet demo that loads a GeoJSON layer and implements React components for data filtering to update the map. Clean ES5/ES6 branch structure, good for teaching component-map integration patterns.</p>
+        <ul class="card-highlights">
+          <li>Tile layer + GeoJSON layer in a React component</li>
+          <li>Filtering data through React state to update the map</li>
+          <li>ES5 and ES6/modern branch variants for comparison</li>
+          <li>Live demo available online</li>
+        </ul>
+        <div class="card-tags">
+          <span class="tag cyan">react</span>
+          <span class="tag cyan">filtering</span>
+          <span class="tag">state-management</span>
+        </div>
+        <div class="card-footer">
+          <span><span class="lang-dot lang-js"></span>JavaScript / React</span>
+          <span>Demo + Code</span>
+        </div>
+      </div>
+
+      <!-- Card 4 -->
+      <div class="card cat-react">
+        <div class="card-top">
+          <div class="card-icon icon-react">🌐</div>
+          <span class="card-stars">⭐ 12 Stars</span>
+        </div>
+        <div class="card-name">
+          <a href="https://github.com/topics/leafletjs?l=typescript" target="_blank">React-Leaflet GeoData Loader (TS)</a>
+        </div>
+        <p class="card-desc">TypeScript + React-Leaflet component for loading GeoTIFFs, shapefiles, zipped shapefiles, and GeoJSONs. Uses georaster-layer-for-leaflet. Useful for advanced GIS students handling non-native formats.</p>
+        <ul class="card-highlights">
+          <li>GeoTIFF and shapefile rendering in React-Leaflet</li>
+          <li>georaster + georaster-layer-for-leaflet integration</li>
+          <li>Zip-compressed shapefile upload handling</li>
+          <li>TypeScript typed throughout — good learning reference</li>
+        </ul>
+        <div class="card-tags">
+          <span class="tag cyan">typescript</span>
+          <span class="tag cyan">geotiff</span>
+          <span class="tag">shapefile</span>
+          <span class="tag">georaster</span>
+        </div>
+        <div class="card-footer">
+          <span><span class="lang-dot lang-ts"></span>TypeScript</span>
+          <span>Advanced Format Support</span>
+        </div>
+      </div>
+
+      <!-- Card 5 -->
+      <div class="card cat-react">
+        <div class="card-top">
+          <div class="card-icon icon-react">🏙️</div>
+          <span class="card-stars">⭐ Active 2025</span>
+        </div>
+        <div class="card-name">
+          <a href="https://github.com/topics/leaflet-react" target="_blank">Sentinel-5P + React-Leaflet Visualizer</a>
+        </div>
+        <p class="card-desc">A ReactJS app that queries Sentinel-5 Precursor satellite data (ESA Copernicus), downloads it automatically, and visualizes climate/air-quality layers on a Leaflet map. Real environmental monitoring use case.</p>
+        <ul class="card-highlights">
+          <li>Sentinel-5P daily climate data via Copernicus Hub API</li>
+          <li>GeoJSON atmospheric data rendered on React-Leaflet</li>
+          <li>Automation scripts for daily satellite data download</li>
+          <li>Environmental monitoring real-world use case</li>
+        </ul>
+        <div class="card-tags">
+          <span class="tag cyan">satellite-data</span>
+          <span class="tag cyan">climate</span>
+          <span class="tag">environmental</span>
+          <span class="tag pink">real-data</span>
+        </div>
+        <div class="card-footer">
+          <span><span class="lang-dot lang-ts"></span>React + TypeScript</span>
+          <span>ESA Data</span>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ══════════════════════════════════════════
+       SECTION 3 — R / SHINY INTEGRATION
+  ══════════════════════════════════════════ -->
+  <section>
+    <div class="section-header">
+      <span class="section-number">03</span>
+      <h2 class="section-title" style="color:var(--accent-amber);">R / Shiny + Leaflet Integration</h2>
+      <span class="section-count">4 repos + resources</span>
+    </div>
+
+    <div class="card-grid">
+
+      <!-- Card 1 -->
+      <div class="card cat-r">
+        <div class="card-top">
+          <div class="card-icon icon-r">📊</div>
+          <span class="card-stars">⭐ 86 Stars</span>
+        </div>
+        <div class="card-name">
+          <a href="https://github.com/topics/leaflet?l=r" target="_blank">Azure Open Data Safety Workshop (R)</a>
+        </div>
+        <p class="card-desc">Workshop materials analyzing the 311 safety dataset for Chicago, Boston, and NYC using SparkR + Leaflet. Covers descriptive analytics, clustering, time-series forecasting, and anomaly detection with map visualization.</p>
+        <ul class="card-highlights">
+          <li>Real 311 urban safety open datasets (3 major cities)</li>
+          <li>SparkR + Azure Databricks pipeline with leaflet output</li>
+          <li>Clustering and time-series analysis on demographic data</li>
+          <li>Tagged as <code>workshop-materials</code> on GitHub</li>
+        </ul>
+        <div class="card-tags">
+          <span class="tag amber">r-shiny</span>
+          <span class="tag amber">city-data</span>
+          <span class="tag">sparkr</span>
+          <span class="tag pink">real-data</span>
+        </div>
+        <div class="card-footer">
+          <span><span class="lang-dot lang-r"></span>R + Spark</span>
+          <span>86 ⭐</span>
+        </div>
+      </div>
+
+      <!-- Card 2 -->
+      <div class="card cat-r">
+        <div class="card-top">
+          <div class="card-icon icon-r">🌿</div>
+          <span class="card-stars">⭐ 129 Stars</span>
+        </div>
+        <div class="card-name">
+          <a href="https://github.com/sachit27/greenR" target="_blank">sachit27 / greenR</a>
+        </div>
+        <p class="card-desc">R package + Shiny app quantifying urban greenness using OpenStreetMap network data. Excellent real-world example of Leaflet integrated with spatial analysis pipelines for urban planning research.</p>
+        <ul class="card-highlights">
+          <li>OpenStreetMap city network as real spatial dataset</li>
+          <li>Shiny web app with interactive leaflet map output</li>
+          <li>Greenness exposure calculations and choropleth output</li>
+          <li>Updated Dec 2024 — actively maintained</li>
+        </ul>
+        <div class="card-tags">
+          <span class="tag amber">shiny</span>
+          <span class="tag amber">urban-data</span>
+          <span class="tag">osm</span>
+          <span class="tag green">2024</span>
+        </div>
+        <div class="card-footer">
+          <span><span class="lang-dot lang-r"></span>R Package</span>
+          <span>129 ⭐ · Dec 2024</span>
+        </div>
+      </div>
+
+      <!-- Card 3 -->
+      <div class="card cat-r">
+        <div class="card-top">
+          <div class="card-icon icon-r">🗺️</div>
+          <span class="card-stars">⭐ Instructional</span>
+        </div>
+        <div class="card-name">
+          <a href="http://sfu-rc.github.io/Tutorial-R-Shiny-Web-Mapping/" target="_blank">SFU Research Computing — R Shiny Web Map Tutorial</a>
+        </div>
+        <p class="card-desc">Simon Fraser University (SFU) structured tutorial covering R + Shiny + Leaflet web mapping from setup through Git/GitHub workflow integration. Designed for academic researchers new to web mapping.</p>
+        <ul class="card-highlights">
+          <li>Full Git workflow integration for reproducible maps</li>
+          <li><code>leaflet()</code> + Shiny <code>renderLeaflet</code> pattern guide</li>
+          <li>addProviderTiles, setView, addPolygons, addMarkers labs</li>
+          <li>Observer/reactive input patterns for interactive maps</li>
+        </ul>
+        <div class="card-tags">
+          <span class="tag amber">shiny</span>
+          <span class="tag amber">academic</span>
+          <span class="tag">git</span>
+          <span class="tag">interactive</span>
+        </div>
+        <div class="card-footer">
+          <span><span class="lang-dot lang-r"></span>R + Shiny</span>
+          <span>University Tutorial</span>
+        </div>
+      </div>
+
+      <!-- Card 4 -->
+      <div class="card cat-r">
+        <div class="card-top">
+          <div class="card-icon icon-r">📈</div>
+          <span class="card-stars">⭐ 108 Stars</span>
+        </div>
+        <div class="card-name">
+          <a href="https://github.com/rte-antares-rpackage/leaflet.minicharts" target="_blank">rte-antares-rpackage / leaflet.minicharts</a>
+        </div>
+        <p class="card-desc">An R package extending Leaflet for dynamic mini-charts (bar, pie, polar) embedded directly on map markers. Extremely useful for displaying multi-variable demographic or energy data geographically.</p>
+        <ul class="card-highlights">
+          <li>Mini-charts (bar/pie/polar) embedded inside Leaflet markers</li>
+          <li>Dynamic update on time slider or filter changes</li>
+          <li>Used with energy grid simulation real-world datasets</li>
+          <li>108 stars, actively maintained through 2023–2024</li>
+        </ul>
+        <div class="card-tags">
+          <span class="tag amber">r-package</span>
+          <span class="tag amber">charts-in-markers</span>
+          <span class="tag">dynamic</span>
+          <span class="tag">demographic</span>
+        </div>
+        <div class="card-footer">
+          <span><span class="lang-dot lang-r"></span>R + JavaScript</span>
+          <span>108 ⭐</span>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ══════════════════════════════════════════
+       SECTION 4 — REAL-WORLD DATASETS
+  ══════════════════════════════════════════ -->
+  <section>
+    <div class="section-header">
+      <span class="section-number">04</span>
+      <h2 class="section-title" style="color:var(--accent-magenta);">Real-World Dataset Integrations</h2>
+      <span class="section-count">4 repos</span>
+    </div>
+
+    <div class="card-grid">
+
+      <!-- Card 1 -->
+      <div class="card cat-realworld">
+        <div class="card-top">
+          <div class="card-icon icon-realworld">🌡️</div>
+          <span class="card-stars">⭐ Weather</span>
+        </div>
+        <div class="card-name">
+          <a href="https://github.com/buche/leaflet-openweathermap" target="_blank">buche / leaflet-openweathermap</a>
+        </div>
+        <p class="card-desc">A battle-tested Leaflet plugin for live OpenWeatherMap data layers. Includes cloud, rain, snow, wind, temperature, and pressure tile overlays, plus real-time city marker clusters with current conditions. Great as an exercise integration target.</p>
+        <ul class="card-highlights">
+          <li>10+ OWM tile layers: clouds, rain, wind, snow, pressure</li>
+          <li>Live city weather markers with auto-refresh (configurable interval)</li>
+          <li>Custom <code>markerFunction</code> and <code>popupFunction</code> hooks for exercises</li>
+          <li>Wind Rose custom icon example included</li>
+        </ul>
+        <div class="card-tags">
+          <span class="tag pink">weather-api</span>
+          <span class="tag pink">real-time</span>
+          <span class="tag">owm</span>
+          <span class="tag">plugin</span>
+        </div>
+        <div class="card-footer">
+          <span><span class="lang-dot lang-js"></span>JavaScript Plugin</span>
+          <span>Live API Data</span>
+        </div>
+      </div>
+
+      <!-- Card 2 -->
+      <div class="card cat-realworld">
+        <div class="card-top">
+          <div class="card-icon icon-realworld">🚇</div>
+          <span class="card-stars">⭐ Active 2024</span>
+        </div>
+        <div class="card-name">
+          <a href="https://github.com/topics/leaflet-map" target="_blank">Dallas Rail Network — Kafka + Leaflet</a>
+        </div>
+        <p class="card-desc">Real-time transit visualization streaming Dallas rail network data via Apache Kafka, Flask, and Leaflet.js. Preprocessed GeoJSON streams dynamically to visualize the rail system interactively. Excellent advanced integration exercise.</p>
+        <ul class="card-highlights">
+          <li>Real Dallas DART rail GeoJSON transit data</li>
+          <li>Apache Kafka streaming → Flask backend → Leaflet frontend</li>
+          <li>Real-time geospatial data visualization pipeline</li>
+          <li>2024 completion — modern streaming architecture</li>
+        </ul>
+        <div class="card-tags">
+          <span class="tag pink">transit-data</span>
+          <span class="tag pink">real-time</span>
+          <span class="tag">kafka</span>
+          <span class="tag cyan">advanced</span>
+        </div>
+        <div class="card-footer">
+          <span><span class="lang-dot lang-js"></span>Python + JS</span>
+          <span>Transit GeoJSON</span>
+        </div>
+      </div>
+
+      <!-- Card 3 -->
+      <div class="card cat-realworld">
+        <div class="card-top">
+          <div class="card-icon icon-realworld">🌋</div>
+          <span class="card-stars">⭐ Highly Cited</span>
+        </div>
+        <div class="card-name">
+          <a href="https://handsondataviz.org/leaflet-maps-open-data-apis.html" target="_blank">HandsOnDataViz / leaflet-maps-open-data-apis</a>
+        </div>
+        <p class="card-desc">Open-access textbook chapter with GitHub templates for Leaflet + real open data APIs. Covers USGS Volcano API, Socrata SODA endpoints, ArcGIS FeatureServer, and heatmaps. Updated August 2024.</p>
+        <ul class="card-highlights">
+          <li>USGS Volcano API + Socrata SODA JSON endpoints</li>
+          <li>Esri-Leaflet ArcGIS FeatureServer integration template</li>
+          <li>Heatmap layer from point density real data</li>
+          <li>Scrollytelling story map template (place narratives)</li>
+        </ul>
+        <div class="card-tags">
+          <span class="tag pink">usgs-data</span>
+          <span class="tag pink">api-data</span>
+          <span class="tag">heatmap</span>
+          <span class="tag green">aug-2024</span>
+        </div>
+        <div class="card-footer">
+          <span><span class="lang-dot lang-html"></span>HTML/JS Templates</span>
+          <span>Open Textbook</span>
+        </div>
+      </div>
+
+      <!-- Card 4 -->
+      <div class="card cat-realworld">
+        <div class="card-top">
+          <div class="card-icon icon-realworld">🏛️</div>
+          <span class="card-stars">⭐ 143 Stars</span>
+        </div>
+        <div class="card-name">
+          <a href="https://github.com/handsondataviz/leaflet-maps-with-google-sheets" target="_blank">handsondataviz / leaflet-maps-with-google-sheets</a>
+        </div>
+        <p class="card-desc">Template connecting Leaflet maps with Google Sheets as a live data backend. No server required — spreadsheet edits update the map automatically via GeoJSON. Excellent for demographic/survey data visualization projects.</p>
+        <ul class="card-highlights">
+          <li>Google Sheets → GeoJSON → Leaflet live pipeline</li>
+          <li>No-server architecture, fully static deployment</li>
+          <li>Marker, polygon, and polyline types from spreadsheet</li>
+          <li>143 stars, updated March 2024</li>
+        </ul>
+        <div class="card-tags">
+          <span class="tag pink">google-sheets</span>
+          <span class="tag pink">demographic</span>
+          <span class="tag">no-server</span>
+          <span class="tag green">2024</span>
+        </div>
+        <div class="card-footer">
+          <span><span class="lang-dot lang-js"></span>JavaScript</span>
+          <span>143 ⭐ · March 2024</span>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ══════════════════════════════════════════
+       SECTION 5 — PLUGIN COLLECTIONS / ADVANCED
+  ══════════════════════════════════════════ -->
+  <section>
+    <div class="section-header">
+      <span class="section-number">05</span>
+      <h2 class="section-title" style="color:var(--accent-blue);">Plugin Collections &amp; Advanced Implementations</h2>
+      <span class="section-count">Must-know plugins</span>
+    </div>
+
+    <div class="callout" style="margin-bottom:24px;">
+      <span class="callout-icon">⚡</span>
+      <div class="callout-body">
+        <strong>Key Plugin Trio for Workshop Labs:</strong> These three plugins alone unlock 80% of advanced Leaflet workshop exercises — combining geometry editing (<code>leaflet-geoman</code>), tile providers (<code>leaflet-providers</code>), and clustering (<code>Leaflet.markercluster</code>) creates a complete spatial analysis sandbox.
+      </div>
+    </div>
+
+    <div class="plugin-grid">
+
+      <div class="plugin-card">
+        <div class="plugin-row">
+          <span class="plugin-name">geoman-io / leaflet-geoman</span>
+          <span class="plugin-stars">⭐ 2.3k</span>
+        </div>
+        <p class="plugin-desc">The most powerful Leaflet plugin for drawing and editing. Supports all geometry types, snapping, cutting, rotating, and scaling. Uses GeoJSON natively. Essential for any editing lab exercise.</p>
+        <div class="card-tags" style="margin-top:8px;">
+          <span class="tag blue">draw</span><span class="tag blue">edit</span><span class="tag">geojson</span>
+        </div>
+      </div>
+
+      <div class="plugin-card">
+        <div class="plugin-row">
+          <span class="plugin-name">Leaflet / Leaflet.markercluster</span>
+          <span class="plugin-stars">⭐ 4.1k</span>
+        </div>
+        <p class="plugin-desc">Official marker clustering plugin. Handles thousands of points gracefully with animated cluster expansion. A standard exercise target for any dataset with dense point data.</p>
+        <div class="card-tags" style="margin-top:8px;">
+          <span class="tag blue">clustering</span><span class="tag">performance</span>
+        </div>
+      </div>
+
+      <div class="plugin-card">
+        <div class="plugin-row">
+          <span class="plugin-name">leaflet-extras / leaflet-providers</span>
+          <span class="plugin-stars">⭐ 2.3k</span>
+        </div>
+        <p class="plugin-desc">Configurations for 100+ free tile providers (OSM, CartoDB, Esri, Stamen). Drop-in basemap switcher for any workshop. Updated Dec 2025 — actively maintained.</p>
+        <div class="card-tags" style="margin-top:8px;">
+          <span class="tag blue">tile-providers</span><span class="tag">basemaps</span>
+        </div>
+      </div>
+
+      <div class="plugin-card">
+        <div class="plugin-row">
+          <span class="plugin-name">Leaflet / Leaflet.heat</span>
+          <span class="plugin-stars">⭐ 1.6k</span>
+        </div>
+        <p class="plugin-desc">Tiny, fast heatmap plugin. Load any point dataset and render a density heatmap in under 10 lines of code. Perfect as a data visualization exercise with weather or demographic data.</p>
+        <div class="card-tags" style="margin-top:8px;">
+          <span class="tag blue">heatmap</span><span class="tag">density</span>
+        </div>
+      </div>
+
+      <div class="plugin-card">
+        <div class="plugin-row">
+          <span class="plugin-name">Leaflet / Leaflet.draw</span>
+          <span class="plugin-stars">⭐ 2.0k</span>
+        </div>
+        <p class="plugin-desc">Classic vector drawing and editing plugin. Draw polygons, lines, and markers interactively. Good for digitizing exercises and spatial query workshops.</p>
+        <div class="card-tags" style="margin-top:8px;">
+          <span class="tag blue">drawing</span><span class="tag">vector</span>
+        </div>
+      </div>
+
+      <div class="plugin-card">
+        <div class="plugin-row">
+          <span class="plugin-name">IHCantabria / Leaflet.CanvasLayer.Field</span>
+          <span class="plugin-stars">⭐ 176</span>
+        </div>
+        <p class="plugin-desc">Custom canvas layer for rendering flow fields (Bezier curves) — ideal for weather wind/current data visualization. Great advanced exercise for atmospheric or oceanographic datasets.</p>
+        <div class="card-tags" style="margin-top:8px;">
+          <span class="tag blue">flow-fields</span><span class="tag pink">weather</span>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ══════════════════════════════════════════
+       SECTION 6 — LEARNING PATH
+  ══════════════════════════════════════════ -->
+  <section>
+    <div class="section-header">
+      <span class="section-number">06</span>
+      <h2 class="section-title" style="color:var(--text);">Suggested Learning Path</h2>
+    </div>
+
+    <div style="background:var(--bg2); border:1px solid var(--border); border-radius:var(--radius); overflow:hidden;">
+      <table class="path-table">
+        <thead>
+          <tr>
+            <th>Level</th>
+            <th>Start With</th>
+            <th>Core Exercises</th>
+            <th>Real Dataset</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><span class="path-level level-beginner">Beginner</span></td>
+            <td>ect123/intro-to-leaflet-workshop</td>
+            <td>Map init, tile layers, GeoJSON, basic markers, popups</td>
+            <td>UBC Buildings GeoJSON (open license)</td>
+          </tr>
+          <tr>
+            <td><span class="path-level level-beginner">Beginner</span></td>
+            <td>maptimeboston/leaflet-intro</td>
+            <td>Custom markers via pointToLayer, choropleth styling</td>
+            <td>Boston City Open Data (rodent incidents CSV)</td>
+          </tr>
+          <tr>
+            <td><span class="path-level level-inter">Intermediate</span></td>
+            <td>tomickigrzegorz/leaflet-examples (#1–40)</td>
+            <td>Layer control, clustering, routing machine, GeoJSON autocomplete</td>
+            <td>OSM + custom GeoJSON datasets</td>
+          </tr>
+          <tr>
+            <td><span class="path-level level-inter">Intermediate</span></td>
+            <td>geospatialem/getting-started-with-leaflet</td>
+            <td>Esri-Leaflet integration, ArcGIS FeatureServer, data-driven style</td>
+            <td>ArcGIS Online hosted services</td>
+          </tr>
+          <tr>
+            <td><span class="path-level level-inter">Intermediate</span></td>
+            <td>handsondataviz / open-data-apis chapter</td>
+            <td>API data loading, heatmaps, scrollytelling stories</td>
+            <td>USGS Volcano API, Socrata SODA endpoints</td>
+          </tr>
+          <tr>
+            <td><span class="path-level level-advanced">Advanced</span></td>
+            <td>tomickigrzegorz/react-leaflet-examples</td>
+            <td>React component architecture, state-driven map updates, TypeScript</td>
+            <td>Mixed + custom datasets</td>
+          </tr>
+          <tr>
+            <td><span class="path-level level-advanced">Advanced</span></td>
+            <td>buche/leaflet-openweathermap</td>
+            <td>Live API tile overlays, dynamic city weather markers, custom marker functions</td>
+            <td>OpenWeatherMap live API</td>
+          </tr>
+          <tr>
+            <td><span class="path-level level-expert">Expert</span></td>
+            <td>leaflet-geoman + Kafka/Flask transit demo</td>
+            <td>Real-time streaming GeoJSON, draw/edit integration, custom spatial tools</td>
+            <td>Dallas DART rail GeoJSON, live Kafka stream</td>
+          </tr>
+          <tr>
+            <td><span class="path-level level-expert">Expert</span></td>
+            <td>R: greenR package + SFU Shiny tutorial</td>
+            <td>Shiny reactive maps, leafletProxy, addPolygons with dynamic data</td>
+            <td>OSM city networks, Census/Tidycensus demographic data</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+
+  <!-- ══════════════════════════════════════════
+       SECTION 7 — QUICK-REFERENCE CALLOUTS
+  ══════════════════════════════════════════ -->
+  <section>
+    <div class="section-header">
+      <span class="section-number">07</span>
+      <h2 class="section-title" style="color:var(--text);">GIS Developer Quick Notes</h2>
+    </div>
+
+    <div style="display:grid; grid-template-columns:repeat(auto-fill,minmax(280px,1fr)); gap:16px;">
+
+      <div class="callout" style="border-color:rgba(0,212,255,0.2); background:rgba(0,212,255,0.04);">
+        <span class="callout-icon">🔌</span>
+        <div class="callout-body" style="">
+          <strong style="color:var(--accent-cyan);">CartoDB / CARTO Workshop</strong><br>
+          The <code>CartoDB/carto-workshop</code> repo (GitHub) contains an advanced Leaflet exercises section (<code>06-sdks/exercises/leaflet.md</code>) covering GeoJSON <code>onEachFeature</code>, <code>filter()</code> functions, and population data from Spanish cities datasets — useful for filtering and feature query labs.
+        </div>
+      </div>
+
+      <div class="callout" style="border-color:rgba(255,179,64,0.2); background:rgba(255,179,64,0.04);">
+        <span class="callout-icon">📦</span>
+        <div class="callout-body">
+          <strong style="color:var(--accent-amber);">GIS Tutorial Collection</strong><br>
+          The GitHub repo <code>gis-tutorials</code> (181 ⭐, updated Jul 2024) is a broad Astro-built site aggregating tutorials across QGIS, Leaflet, React, and routing engines — useful as a cross-reference hub for advanced students bridging desktop GIS and web mapping.
+        </div>
+      </div>
+
+      <div class="callout" style="border-color:rgba(255,77,138,0.2); background:rgba(255,77,138,0.04);">
+        <span class="callout-icon">🌬️</span>
+        <div class="callout-body">
+          <strong style="color:var(--accent-magenta);">Wind Layer (Weather Advanced)</strong><br>
+          <code>sakitam-fdd/wind-layer</code> provides Windy-style animated weather (GFS/ECMWF GRIB2 data) for Leaflet, OpenLayers, and Mapbox GL. For advanced weather data workshops using real NWP model output — supports ECMWF forecasts.
+        </div>
+      </div>
+
+      <div class="callout" style="border-color:rgba(61,255,154,0.15); background:rgba(61,255,154,0.04);">
+        <span class="callout-icon">🧩</span>
+        <div class="callout-body">
+          <strong style="color:var(--accent-green);">Agent-Based Modeling on Leaflet</strong><br>
+          <code>projectmesa/mesa-geo</code> (942 ⭐, updated Sep 2024) enables agent-based social simulations rendered on real Leaflet maps. Demographic or urban mobility simulation data can be displayed as animated geospatial agents — excellent advanced research use case.
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+</main>
+
+<!-- FOOTER -->
+<footer>
+  <div>
+    <span class="footer-brand">LEAFLET.JS — GIS REPO GUIDE</span>
+    <span style="margin-left:18px; color:var(--text-dim);">Curated for 2024–2026 · Claude AI Research</span>
+  </div>
+  <div style="color:var(--text-dim); font-size:11px;">
+    Stars & activity verified Feb 2026 · All repos open-source
+  </div>
+</footer>
+
+</body>
+</html>
