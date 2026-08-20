@@ -237,6 +237,8 @@ Crie um arquivo `camada.html`. Escreva o conteúdo textual descrevendo uma camad
 - Um `<h2>` "Especificações Técnicas" com informações usando `<strong>`, `<em>` e `<abbr>`
 - Um `<h2>` "Sistema de Referência" com as coordenadas usando `<sub>` e `<sup>` onde apropriado
 
+![Exercício 2.A resolvido — Página de Apresentação de Camada](../img/ex_html/mod2_camada.png)
+
 **Exercício 2.B — Artigo Técnico Marcado**
 Dado o texto abaixo (em prosa, sem marcação), aplique as tags HTML semânticas mais adequadas em cada trecho:
 
@@ -246,6 +248,8 @@ O NDVI (Normalized Difference Vegetation Index) é um índice que varia de -1 a 
 Valores acima de 0,6 indicam vegetação densa e saudável. ATENÇÃO: valores negativos
 geralmente indicam superfícies de água ou nuvens. A fórmula é: (NIR - Red) / (NIR + Red).
 ```
+
+![Exercício 2.B resolvido — Artigo Técnico Marcado (NDVI)](../img/ex_html/mod_2_ndvi.png)
 
 ---
 
@@ -431,6 +435,10 @@ Crie um arquivo `galeria.html` com:
 - Cada imagem deve ter `alt` descritivo simulando um produto cartográfico (ex: "Mapa de declividade...", "Imagem Landsat-8...")
 - Use `loading="lazy"` em todas
 - Adicione um link `<a download>` sob cada figura para simular download do arquivo
+
+![Exercício 3.A resolvido — Galeria de Mapas (parte 1)](../img/ex_html/mod3_galeria1.png)
+![Exercício 3.A resolvido — Galeria de Mapas (parte 2)](../img/ex_html/mod3_galeria2.png)
+![Exercício 3.A resolvido — Galeria de Mapas (parte 3)](../img/ex_html/mod3_galeria3.png)
 
 **Exercício 3.B — Painel de Recursos GIS**
 Crie um arquivo `recursos.html` com uma lista de links para serviços e portais de dados geoespaciais reais:
