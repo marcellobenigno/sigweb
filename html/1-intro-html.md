@@ -446,6 +446,8 @@ Crie um arquivo `recursos.html` com uma lista de links para serviços e portais 
 - Pelo menos 1 link interno para uma âncora na mesma página (`#secao-x`)
 - Todos os links externos com `target="_blank"` e `rel="noopener noreferrer"`
 
+![Exercício 3.B resolvido — Painel de Recursos GIS](../img/ex_html/mod3_recursos.png)
+
 ---
 
 ### 3.3 Desafio de Integração — "Rumo ao WebGIS"
