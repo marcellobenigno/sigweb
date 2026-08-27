@@ -288,8 +288,7 @@ A tag `<a>` (*anchor* — âncora) é o elemento que transforma a Web em uma red
 ```html
 <!-- Link externo: URL completa (protocolo + domínio + caminho) -->
 <a href="https://www.ibge.gov.br/geociencias/downloads-geociencias.html"
-   target="_blank"
-   rel="noopener noreferrer">
+   target="_blank">
   Baixar dados geoespaciais do IBGE
 </a>
 ```
@@ -300,7 +299,6 @@ A tag `<a>` (*anchor* — âncora) é o elemento que transforma a Web em uma red
 |----------|-------|--------|
 | `href` | URL ou caminho | Destino do link |
 | `target="_blank"` | Nova aba | Abre sem fechar a página atual |
-| `rel="noopener noreferrer"` | Segurança | **Obrigatório** com `target="_blank"` — impede que a página destino acesse o `window.opener` (vulnerabilidade de segurança) |
 | `title` | Texto | Tooltip ao passar o mouse — útil para acessibilidade |
 | `download` | Nome do arquivo | Força download em vez de navegação |
 
@@ -310,15 +308,13 @@ A tag `<a>` (*anchor* — âncora) é o elemento que transforma a Web em uma red
 <!-- Link para serviço WMS do INPE -->
 <a href="http://www.dgi.inpe.br/geoserver/wms?SERVICE=WMS&REQUEST=GetCapabilities"
    target="_blank"
-   rel="noopener noreferrer"
    title="Capacidades do serviço WMS do INPE">
   Serviço WMS — INPE (GetCapabilities)
 </a>
 
 <!-- Link para metadados no GeoNetwork -->
 <a href="https://metadados.inde.gov.br/geonetwork/srv/por/catalog.search"
-   target="_blank"
-   rel="noopener noreferrer">
+   target="_blank">
   Catálogo de Metadados — INDE
 </a>
 
@@ -389,7 +385,7 @@ A tag `<img>` é um **elemento vazio** (sem tag de fechamento) — ela incorpora
 </figure>
 
 <!-- Imagem de mapa com link para versão maior -->
-<a href="imagens/mapa_uso_solo_alta_res.pdf" target="_blank" rel="noopener noreferrer">
+<a href="imagens/mapa_uso_solo_alta_res.pdf" target="_blank">
   <img
     src="imagens/mapa_uso_solo_thumb.jpg"
     alt="Miniatura do mapa de uso e cobertura do solo da Bacia do Rio Gramame"
@@ -444,7 +440,7 @@ Crie um arquivo `recursos.html` com uma lista de links para serviços e portais 
 - Pelo menos 2 links para portais de dados abertos (IBGE, INPE, ANA, etc.)
 - Pelo menos 1 link para um serviço WMS público
 - Pelo menos 1 link interno para uma âncora na mesma página (`#secao-x`)
-- Todos os links externos com `target="_blank"` e `rel="noopener noreferrer"`
+- Todos os links externos com `target="_blank"`
 
 ![Exercício 3.B resolvido — Painel de Recursos GIS](../img/ex_html/mod3_recursos.png)
 
@@ -864,8 +860,8 @@ HTML semântico significa usar tags que **comunicam o significado** do conteúdo
     </p>
     <p>
       <small>
-        Dados: <a href="https://mapbiomas.org" target="_blank" rel="noopener noreferrer">MapBiomas</a> |
-        Licença: <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noopener noreferrer">CC BY 4.0</a>
+        Dados: <a href="https://mapbiomas.org" target="_blank">MapBiomas</a> |
+        Licença: <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank">CC BY 4.0</a>
       </small>
     </p>
   </footer>
@@ -1698,7 +1694,7 @@ Antes de entregar, verifique:
 - [ ] `lang="pt-BR"` no `<html>`
 - [ ] `charset="UTF-8"` e `viewport` no `<head>`
 - [ ] Todos os `<label>` associados ao `<input>` correto via `for`/`id`
-- [ ] `target="_blank"` sempre acompanhado de `rel="noopener noreferrer"`
+- [ ] `target="_blank"`
 - [ ] Tabela com `<caption>` e atributos `scope` nos `<th>`
 - [ ] Responsividade funcional em tela de 375px (iPhone SE) e 1440px (desktop)
 
