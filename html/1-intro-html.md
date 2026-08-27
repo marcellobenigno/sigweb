@@ -682,11 +682,15 @@ Tabelas HTML devem ser usadas **exclusivamente para dados tabulares** — nunca 
 **Exercício 4.A — Tabela de Atributos**
 Crie um arquivo `atributos.html` com uma tabela completa (`<caption>`, `<thead>`, `<tbody>`, `<tfoot>`) representando pelo menos 5 feições de uma camada vetorial à sua escolha. Use dados reais ou realistas. A tabela deve ter um campo numérico cujo total seja calculado no `<tfoot>`.
 
+![Exercício 4.A resolvido — Tabela de Atributos](../img/ex_html/md4_atributos.png)
+
 **Exercício 4.B — Painel de Camadas com Listas Aninhadas**
 Crie um arquivo `camadas.html` com:
 - Uma `<ol>` com os passos do fluxo de trabalho do seu projeto de mapeamento
 - Uma `<ul>` aninhada listando as camadas de dados utilizadas por categoria (base, temática, auxiliar)
 - Uma `<dl>` com os metadados principais de uma camada (mínimo 6 pares `<dt>`/`<dd>`)
+
+![Exercício 4.B resolvido — Painel de Camadas com Listas Aninhadas](../img/ex_html/mod4_camadas.png)
 
 ---
 
@@ -895,12 +899,16 @@ HTML semântico significa usar tags que **comunicam o significado** do conteúdo
 **Exercício 5.A — Auditoria Semântica**
 Pegue o arquivo `index.html` criado nos módulos anteriores e substitua todos os `<div>` por tags semânticas apropriadas. Justifique em comentários HTML cada substituição feita.
 
+![Exercício 5.A resolvido — Auditoria Semântica](../img/ex_html/mod5_index_semantico.png)
+
 **Exercício 5.B — Layout de Portal GIS**
 Esboce e codifique em HTML puro (sem CSS) a estrutura semântica de um portal de mapas simples com:
 - `<header>` com nome do portal e `<nav>` de categorias (Hidrografia, Vegetação, Infraestrutura)
 - `<main>` com `<article>` para o mapa e `<section>` para filtros
 - `<aside>` com legenda e tabela de atributos resumida
 - `<footer>` com informações de datum, escala e licença
+
+![Exercício 5.B resolvido — Layout de Portal GIS](../img/ex_html/mod5_portal.png)
 
 ---
 
